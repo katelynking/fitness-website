@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import Auth from '../utils/auth';
 // import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 const SearchBooks = () => {
+  const [exerciseList] = useState([  
+  "Back",
+  "Cardio",
+  "Chest",
+  "Lower Arms",
+  "Lower Legs",
+  "Neck",
+  "Shoulders",
+  "Upper Arms",
+  "Upper Legs",
+  "Waist"]);
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [exercise, setExercise] = useState('');
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
@@ -24,9 +38,9 @@ const SearchBooks = () => {
   });
 
   // create method to search for books and set state on form submit
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    
+  const handleFormSubmit = async (exercise) => {
+    // event.preventDefault();
+    console.log(exercise);
 
     // if (!searchInput) {
     //   return false;
@@ -38,8 +52,7 @@ const SearchBooks = () => {
 
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
-    
-      const url2 = 'https://exercisedb.p.rapidapi.com/exercises';
+      const url2 = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${exercise.toLowerCase()}`;
 
         const options = {
           method: 'GET',
@@ -57,7 +70,7 @@ const SearchBooks = () => {
 
       const bookData = res.map((book) => ({
         id: book.id,
-        name: book.id,
+        name: book.name,
         bodyPart: book.bodyPart,
         target: book.target,
         equipment: book.equipment,
@@ -72,35 +85,34 @@ const SearchBooks = () => {
       //   description: book.volumeInfo.description,
       //   image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
-
-      setSearchedBooks(bookData);
-      setSearchInput('');
+      // console.log(bookData);
+      // setSearchedBooks(bookData);
+      setExercise('');
     } catch (err) {
       console.error(err);
     }
   };
 
   // create function to handle saving a book to our database
-  const handleSaveBook = async (bookId) => {
+  const handleExerciseSelection = async (exercise) => {
     // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-
+    console.log(exercise);
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+    handleFormSubmit(exercise);
     if (!token) {
       return false;
     }
 
     try {
-      const response = await saveBook(bookToSave, token);
+      // const response = await saveBook(bookToSave, token);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      setExercise('chest');
     } catch (err) {
       console.error(err);
     }
@@ -111,25 +123,17 @@ const SearchBooks = () => {
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
           <h1>Search for Exercises!</h1>
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='searchInput'
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='Search for an exercise'
-                />
-              </Col>
-              <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
-                  Submit Search
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
+          <DropdownButton id="dropdown-basic-button" title="Pick Body Part">
+            {exerciseList.map(exercise => {
+              return (
+                <Dropdown.Item key={exercise} data-exercise={exercise} target={exercise} onClick={(e) => {
+                  handleExerciseSelection(e.target.getAttribute('data-exercise'))
+                }}>
+                  {exercise}
+                </Dropdown.Item>
+              )
+            })}
+          </DropdownButton>
         </Container>
       </Jumbotron>
 
@@ -147,17 +151,20 @@ const SearchBooks = () => {
                   <Card.Img src={book.image} alt={`The cover for ${book.name}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.bodyPart}</Card.Title>
+                  <Card.Title>{book.name}</Card.Title>
+                  <p className="small">Exercise: {book.name}</p>
+                  <p className="small">Body Part: {book.bodyPart}</p>
                   <p className='small'>Taget: {book.target}</p>
-                  <Card.Text>{book.equipment}</Card.Text>
+                  <Card.Text>Equipment: {book.equipment}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
                       className='btn-block btn-info'
-                      onClick={() => handleSaveBook(book.bookId)}>
-                      {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-                        ? 'This exercise has already been saved!'
-                        : 'Save this Exercise!'}
+                      // onClick={() => handleSaveBook(book.bookId)}>
+                      // {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                        // ? 'This exercise has already been saved!'
+                        // : 'Save this Exercise!'
+                      >}
                     </Button>
                   )}
                 </Card.Body>
