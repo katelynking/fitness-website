@@ -12,19 +12,19 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            Google Books Search
+      <Navbar variant='dark' expand='lg'>
+        <Container fluid className='justify-content-center'>
+          <Navbar.Brand className='heading'>
+            FITNESS TRACKER
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
+          {/* <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
               <Nav.Link as={Link} to='/'>
-                Search For Books
-              </Nav.Link>
+                Search
+              </Nav.Link> */}
               {/* if user is logged in show saved books and logout */}
-              {Auth.loggedIn() ? (
+              {/* {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
                     See Your Books
@@ -35,17 +35,17 @@ const AppNavbar = () => {
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
               )}
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
         </Container>
       </Navbar>
       {/* set modal data up */}
-      <Modal
+      {/* <Modal
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
-        aria-labelledby='signup-modal'>
+        aria-labelledby='signup-modal'> */}
         {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='login'>
+        {/* <Tab.Container defaultActiveKey='login'>
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
@@ -69,7 +69,7 @@ const AppNavbar = () => {
             </Tab.Content>
           </Modal.Body>
         </Tab.Container>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

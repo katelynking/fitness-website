@@ -80,9 +80,9 @@ const SearchBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
-        <Container>
-          <h1>Search for Books!</h1>
+      {/* <Jumbotron fluid className='text-light'> */}
+        <Container className='justify-content-center'>
+          {/* <h1>Search for Books!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -93,25 +93,43 @@ const SearchBooks = () => {
                   type='text'
                   size='lg'
                   placeholder='Search for a book'
-                />
-              </Col>
-              <Col xs={12} md={4}>
+                /> 
+              </Col>*/}
+              {/* <Col xs={12} md={4}>
                 <Button type='submit' variant='success' size='lg'>
                   Submit Search
                 </Button>
               </Col>
             </Form.Row>
-          </Form>
+          </Form> */}
         </Container>
-      </Jumbotron>
+      {/* </Jumbotron> */}
 
-      <Container>
-        <h2>
-          {searchedBooks.length
+      <Container className='justify-content-center'>
+        <span className='row justify-content-center'>
+        <span className='col-lg-12 justify-content-center'>
+        <div className='slogan justify-content-center'>
+          <i>
+          STRENGTH  
+          
+          <b> & </b>
+          
+          PERFORMANCE 
+          </i><br/>
+          MADE <b>SIMPLE</b>
+
+          </div>
+          </span>
+          </span>
+
+
+
+
+          {/* {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
-            : 'Search for a book to begin'}
-        </h2>
-        <CardColumns>
+            : 'Search for a book to begin'} */}
+        
+        {/* <CardColumns>
           {searchedBooks.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>
@@ -136,7 +154,7 @@ const SearchBooks = () => {
               </Card>
             );
           })}
-        </CardColumns>
+        </CardColumns> */}
       </Container>
     </>
   );
