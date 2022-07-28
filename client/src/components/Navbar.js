@@ -19,7 +19,7 @@ const AppNavbar = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
+            <Nav className='ml-auto links'>
               <Nav.Link as={Link} to='/saved'>
                 Your Exercises
               </Nav.Link>
@@ -39,13 +39,15 @@ const AppNavbar = () => {
         </Container>
       </Navbar>
       {/* set modal data up */}
-      {/* <Modal
+      <Modal
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
-        aria-labelledby='signup-modal'> */}
+        aria-labelledby='signup-modal'
+        >
+          
         {/* tab container to do either signup or login component */}
-        {/* <Tab.Container defaultActiveKey='login'>
+        <Tab.Container defaultActiveKey='login'>
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
@@ -69,7 +71,7 @@ const AppNavbar = () => {
             </Tab.Content>
           </Modal.Body>
         </Tab.Container>
-      </Modal> */}
+      </Modal>
     </>
   );
 };
