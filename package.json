@@ -1,5 +1,5 @@
 {
-  "name": "googlebooks-app",
+  "name": "fitness-app",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -14,12 +14,5 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
-  },
-  "dependencies": {
-    "apollo-client": "^2.6.10",
-    "graphql": "^15.5.2",
-    "mdb-react-ui-kit": "^4.1.0",
-    "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0"
   }
 }
