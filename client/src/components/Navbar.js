@@ -12,7 +12,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar variant='dark' expand='lg'>
+      <Navbar variant='dark' expand='lg' className='landing-page-body'>
         <Container fluid className='justify-content-center'>
           <Navbar.Brand className='heading'>
             FITNESS TRACKER
@@ -27,7 +27,7 @@ const AppNavbar = () => {
               {/* {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
-                    See Your Books
+                    See Your Exercises
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>

@@ -3,10 +3,21 @@
 
 
 body {
-  background-image: url('./img/weight-room-1.jpg');
-  background-size: 110%;
+  /* background-image: url('./img/weight-room-1.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
   font-family: 'Lato', sans-serif;
   
+
+}
+
+.landing-page-body {
+  background-image: url('./img/weight-room-1.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Lato', sans-serif;
 
 }
 
