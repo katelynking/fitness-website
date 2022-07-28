@@ -6,6 +6,15 @@ const typeDefs = gql`
     user: User
   }
 
+  type Exercise {
+    bodyPart: String
+    exerciseId: String!
+    gifUrl: String
+    equipment: String
+    name: String!
+    target: String
+  }
+
   type Book {
     bookId: ID!
     authors: [String]
@@ -20,7 +29,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     bookCount: Int
-    savedBooks: [Book]
+    savedExercises: [Exercise]
   }
 
   input BookInput {
