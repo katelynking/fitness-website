@@ -4,15 +4,15 @@
 
 body {
   /* background-image: url('./img/weight-room-1.jpg');
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; */
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif; 
   
 
 }
 
-.landing-page-body {
+.home {
   background-image: url('./img/weight-room-1.jpg');
   background-size: 100%;
   background-repeat: no-repeat;

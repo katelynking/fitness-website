@@ -105,22 +105,7 @@ const SearchBooks = () => {
         </Container>
       {/* </Jumbotron> */}
 
-      <Container className='justify-content-center'>
-        <span className='row justify-content-center'>
-        <span className='col-lg-12 justify-content-center'>
-        <div className='slogan justify-content-center'>
-          <i>
-          STRENGTH  
-          
-          <b> & </b>
-          
-          PERFORMANCE 
-          </i><br/>
-          MADE <b>SIMPLE</b>
-
-          </div>
-          </span>
-          </span>
+      
 
 
 

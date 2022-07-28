@@ -14,17 +14,17 @@ const AppNavbar = () => {
     <>
       <Navbar variant='dark' expand='lg' className='landing-page-body'>
         <Container fluid className='justify-content-center'>
-          <Navbar.Brand className='heading'>
+          <Navbar.Brand as={Link} to='/' className='heading'>
             FITNESS TRACKER
           </Navbar.Brand>
-          {/* <Navbar.Toggle aria-controls='navbar' />
+          <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/'>
-                Search
-              </Nav.Link> */}
+              <Nav.Link as={Link} to='/saved'>
+                Your Exercises
+              </Nav.Link>
               {/* if user is logged in show saved books and logout */}
-              {/* {Auth.loggedIn() ? (
+              {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
                     See Your Exercises
@@ -35,7 +35,7 @@ const AppNavbar = () => {
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
               )}
             </Nav>
-          </Navbar.Collapse> */}
+          </Navbar.Collapse> 
         </Container>
       </Navbar>
       {/* set modal data up */}
