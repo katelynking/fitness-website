@@ -37,22 +37,22 @@ const resolvers = {
       const token = signToken(user);
       return { user, token };
     },
-    saveBook: async (parent, { book }, context) => {
+    saveExercise: async (parent, { exercise }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: book } },
+          { $addToSet: { savedExercises: exercise } },
           { new: true }
         );
         return updatedUser;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    removeBook: async (parent, { bookId }, context) => {
+    removeExercise: async (parent, { exerciseId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId: bookId } } },
+          { $pull: { savedExercises: { exerciseId: exerciseId } } },
           { new: true }
         );
         return updatedUser;
