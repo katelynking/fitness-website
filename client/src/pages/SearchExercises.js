@@ -174,7 +174,7 @@ const SearchExercises = () => {
                   <Card.Title>{book.name}</Card.Title>
                   <p className="small">Exercise: {book.name}</p>
                   <p className="small">Body Part: {book.bodyPart}</p>
-                  <p className="small">Taget: {book.target}</p>
+                  <p className="small">Target: {book.target}</p>
                   <Card.Text>Equipment: {book.equipment}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
