@@ -28,6 +28,17 @@ export const loginUser = (userData) => {
   });
 };
 
+export const saveExercise = (exerciseData, token) => {
+  return fetch('/api/users', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(exerciseData),
+  });
+};
+
 // save book data for a logged in user
 export const saveBook = (bookData, token) => {
   return fetch('/api/users', {
@@ -41,7 +52,7 @@ export const saveBook = (bookData, token) => {
 };
 
 // remove saved book data for a logged in user
-export const deleteBook = (bookId, token) => {
+export const deleteExercise = (bookId, token) => {
   return fetch(`/api/users/books/${bookId}`, {
     method: 'DELETE',
     headers: {

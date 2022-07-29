@@ -9,11 +9,11 @@ import {
   DropdownButton,
 } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import { getMe, deleteBook } from "../utils/API";
+import { getMe, deleteExercise } from "../utils/API";
 import Auth from "../utils/auth";
-import { removeBookId } from "../utils/localStorage";
+import { removeExerciseId } from "../utils/localStorage";
 
-const SavedBooks = () => {
+const SavedExercises = () => {
   const [caloriesList] = useState(["Running", "Skiing", "Football", "Lifting"]);
 
   const [userData, setUserData] = useState({});
@@ -82,8 +82,8 @@ const SavedBooks = () => {
     }
   };
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteBook = async (bookId) => {
+  // create function that accepts the exercise's mongo _id value as param and deletes the exercise from the database
+  const handleDeleteExercise = async (exerciseId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -91,7 +91,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await deleteExercise(exerciseId, token);
 
       if (!response.ok) {
         throw new Error("something went wrong!");
@@ -99,8 +99,8 @@ const SavedBooks = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
-      removeBookId(bookId);
+      // upon success, remove exercise's id from localStorage
+      removeExerciseId(exerciseId);
     } catch (err) {
       console.error(err);
     }
@@ -128,7 +128,7 @@ const SavedBooks = () => {
       //   throw new Error('something went wrong!');
       // }
 
-      // if book successfully saves to user's account, save book id to state
+      // if exercise successfully saves to user's account, save exercise id to state
       setCalories("lifting");
     } catch (err) {
       console.error(err);
@@ -161,9 +161,9 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? "book" : "books"
+          {userData.savedExercises.length
+            ? `Viewing ${userData.savedExercises.length} saved ${
+                userData.savedExercises.length === 1 ? "exercise" : "exercises"
               }:`
             : "You have no saved exercises!"}
         </h2>
@@ -171,9 +171,9 @@ const SavedBooks = () => {
           {searchedCals.map((cal) => {
             return (
               <Card key={cal.name} border="dark">
-                {/* {book.image ? (
+                {/* {exercise.image ? (
                   <Card.Img
-                    src={book.image}
+                    src={exercise.image}
                     alt={`The cover for ${cal.name}`}
                     variant="top"
                   />
@@ -190,23 +190,23 @@ const SavedBooks = () => {
               </Card>
             );
           })}
-          {userData.savedBooks.map((book) => {
+          {userData.savedExercises.map((exercise) => {
             return (
-              <Card key={book.bookId} border="dark">
-                {book.image ? (
+              <Card key={exercise.exerciseId} border="dark">
+                {exercise.image ? (
                   <Card.Img
-                    src={book.image}
-                    alt={`The cover for ${book.title}`}
+                    src={exercise.image}
+                    alt={`The cover for ${exercise.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className="small">Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Title>{exercise.title}</Card.Title>
+                  <p className="small">Authors: {exercise.authors}</p>
+                  <Card.Text>{exercise.description}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteBook(book.bookId)}
+                    onClick={() => handleDeleteExercise(exercise.exerciseId)}
                   >
                     Delete this exercise!
                   </Button>
@@ -220,4 +220,4 @@ const SavedBooks = () => {
   );
 };
 
-export default SavedBooks;
+export default SavedExercises;

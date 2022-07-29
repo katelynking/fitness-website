@@ -28,20 +28,20 @@ export const ADD_USER = gql`
         _id
         username
         email
-        bookCount
+        exerciseCount
       }
     }
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($newBook: InputBook!) {
-    saveBook(newBook: $newBook) {
+export const SAVE_EXERCISE = gql`
+  mutation saveExercise($newExercise: InputExercise!) {
+    saveExercise(newExercise: $newExercise) {
       _id
       username
       email
-      savedBooks {
-        bookId
+      savedExercises {
+        exerciseId
         authors
         description
         title
@@ -52,14 +52,14 @@ export const SAVE_BOOK = gql`
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_EXERCISE = gql`
+  mutation removeExercise($exerciseId: ID!) {
+    removeExercise(exerciseId: $exerciseId) {
       _id
       username
       email
-      savedBooks {
-        bookId
+      savedExercise {
+        exerciseId
         authors
         description
         title

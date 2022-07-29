@@ -42,14 +42,14 @@ module.exports = {
     const token = signToken(user);
     res.json({ token, user });
   },
-  // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
+
   // user comes from `req.user` created in the auth middleware function
-  async saveBook({ user, body }, res) {
+  async saveExercise({ user, body }, res) {
     console.log(user);
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
-        { $addToSet: { savedBooks: body } },
+        { $addToSet: { savedExercises: body } },
         { new: true, runValidators: true }
       );
       return res.json(updatedUser);
@@ -58,11 +58,11 @@ module.exports = {
       return res.status(400).json(err);
     }
   },
-  // remove a book from `savedBooks`
-  async deleteBook({ user, params }, res) {
+
+  async deleteExercise({ user, params }, res) {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user._id },
-      { $pull: { savedBooks: { bookId: params.bookId } } },
+      { $pull: { savedExercisess: { exerciseId: params.exerciseId } } },
       { new: true }
     );
     if (!updatedUser) {
