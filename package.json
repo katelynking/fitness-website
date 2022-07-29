@@ -14,16 +14,5 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
-<<<<<<< HEAD
-  },
-  "dependencies": {
-    "apollo": "^2.34.0",
-    "apollo-client": "^2.6.10",
-    "graphql": "^15.5.2",
-    "mdb-react-ui-kit": "^4.1.0",
-    "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0"
-=======
->>>>>>> 832ba6e60e6b006f188d3cbc7f832b0afa0e619a
   }
 }

@@ -8,11 +8,11 @@ const Home = () => {
     <Col>
     <span className="row justify-content-center">
             <div className="slogan justify-content-center">
-              <i><b>
+              <i>
                 STRENGTH 
                  & 
                   PERFORMANCE
-                  </b></i>
+                </i>
               <br />
               MADE <b>SIMPLE</b>
             </div>
