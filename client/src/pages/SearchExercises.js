@@ -125,6 +125,7 @@ const SearchExercises = () => {
     } catch (err) {
       console.error(err);
     }
+  
   };
 
   const handleSaveExercise = async (exerciseId) => {
@@ -158,11 +159,12 @@ const SearchExercises = () => {
   }
   
   return (
-    <>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
-          <h1>Search for Exercises!</h1>
-          <DropdownButton id="dropdown-basic-button" title="Pick Body Part">
+    <div className='container-background centered'>
+      <div fluid className="vibrant">
+        <Container >
+          <span className='exercise-search-font'>
+            SEARCH FOR EXERCISES</span>
+          <DropdownButton id="dropdown-basic-button" title="SELECT BODY PART">
             {exerciseList.map((exercise) => {
               return (
                 <Dropdown.Item
@@ -181,14 +183,14 @@ const SearchExercises = () => {
             })}
           </DropdownButton>
         </Container>
-      </Jumbotron>
+      </div>
 
       <Container>
-        <h2>
+        <span className='white-font'>
           {searchedExercises.length
             ? `Viewing ${searchedExercises.length} results:`
             : "Search for an exercise to begin"}
-        </h2>
+        </span>
         <CardColumns>
           {searchedExercises.map((exercise) => {
             return (
@@ -209,11 +211,11 @@ const SearchExercises = () => {
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedExerciseIds?.some((savedExerciseId) => savedExerciseId === exercise.exerciseId)}
-                      className="btn-block btn-info"
+                      className="btn-block btn-info add-btn"
                       onClick={() => handleSaveExercise(exercise.exerciseId)}>
                       {savedExerciseIds?.some((savedExerciseId) => savedExerciseId === exercise.exerciseId)
-                      ? 'This exercise has already been saved!'
-                       : 'Save this Exercise!'}
+                      ? 'SAVED!'
+                       : 'ADD EXERCISE'}
                     </Button>
                   )}
                 </Card.Body>
@@ -222,7 +224,7 @@ const SearchExercises = () => {
           })}
         </CardColumns>
       </Container>
-    </>
+    </div>
   );
 };
 
