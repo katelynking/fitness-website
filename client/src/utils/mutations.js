@@ -35,31 +35,15 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_EXERCISE = gql`
-mutation saveExercise(
-  $exerciseId: String!
-  $bodyPart: [String]
-  $gifUrl: String
-  $equipment: String
-  $name: String
-  $target: String
-) {
-  saveExercise(
-      exerciseId: $exerciseId
-      bodyPart: $bodyPart
-      gifUrl: $gifUrl
-      equipment: $equipment
-      name: $name
-      target: $target
-  ) {
-      email
-      savedExercises {
-          exerciseId
-          bodyPart
-          gifUrl
-          equipment
-          name
-          target
-      }
+mutation SaveExercise($exerciseData: ExerciseInput!) {
+  saveExercise(exerciseData: $exerciseData) {
+    _id
+    username
+    email
+    savedExercises {
+      exerciseId
+      name
+    }
   }
 }
 `;

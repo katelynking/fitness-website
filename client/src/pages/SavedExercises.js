@@ -8,10 +8,12 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+// import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import { getMe, deleteExercise } from "../utils/API";
 import Auth from "../utils/auth";
 import { removeExerciseId } from "../utils/localStorage";
+import { useMutation } from '@apollo/client';
+import { SAVE_EXERCISE } from '../utils/mutations'
 
 const SavedExercises = () => {
   const [caloriesList] = useState(["Running", "Skiing", "Football", "Lifting"]);

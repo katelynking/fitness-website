@@ -37,16 +37,18 @@ const resolvers = {
       const token = signToken(user);
       return { user, token };
     },
-    saveExercise: async (parent, { exercise }, context) => {
+    saveExercise: async (parent, { exerciseData }, context) => {
+      console.log('savedExercise', (new AuthenticationError(`${context.user._id}`)).message);
+      const {exerciseId} = exerciseData
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedExercises: exercise } },
+          { $addToSet: { savedExercises: exerciseData } },
           { new: true }
         );
         return updatedUser;
-      }
-      throw new AuthenticationError("You need to be logged in!");
+      }("You need to be logged in!")
+      throw new AuthenticationError;
     },
     removeExercise: async (parent, { exerciseId }, context) => {
       if (context.user) {
