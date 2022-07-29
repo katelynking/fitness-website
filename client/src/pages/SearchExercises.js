@@ -16,7 +16,7 @@ import Auth from "../utils/auth";
 import { saveExerciseIds, getSavedExerciseIds } from "../utils/localStorage";
 import { useMutation } from "@apollo/client";
 import { SAVE_EXERCISE } from "../utils/mutations";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+// import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const SearchExercises = () => {
   const [exerciseList] = useState([
@@ -127,6 +127,28 @@ const SearchExercises = () => {
     }
   };
 
+  const handleSaveExercise = async (exerciseId) => {
+    const exerciseToSave = searchedExercise.find((exercise) => exercise.exerciseId === exerciseId);
+
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const response = await saveExercise(exerciseToSave, token);
+
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
+      setSavedExerciseIds([...savedExerciseIds, exerciseToSave.exerciseId]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
@@ -182,12 +204,10 @@ const SearchExercises = () => {
                         (savedExerciseId) => savedExerciseId === exercise.exerciseId
                       )}
                       className="btn-block btn-info"
-                      // onClick={() => handleSaveBook(exercise.bookId)}>
-                      // {savedBookIds?.some((savedBookId) => savedBookId === exercise.bookId)
-                      // ? 'This exercise has already been saved!'
-                      // : 'Save this Exercise!'}
-                    >
-                      
+                      onClick={() => handleSaveExercise(exercise.exerciseId)}>
+                      {savedExerciseIds?.some((savedExerciseId) => savedExerciseId === exercise.ExerciseId)
+                      ? 'This exercise has already been saved!'
+                      : 'Save this Exercise!'}                      
                     </Button>
                   )}
                 </Card.Body>
