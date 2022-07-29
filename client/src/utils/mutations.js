@@ -35,36 +35,46 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_EXERCISE = gql`
-  mutation saveExercise($newExercise: InputExercise!) {
-    saveExercise(newExercise: $newExercise) {
-      _id
-      username
+mutation saveExercise(
+  $exerciseId: String!
+  $bodyPart: [String]
+  $gifUrl: String
+  $equipment: String
+  $name: String
+  $target: String
+) {
+  saveExercise(
+      exerciseId: $exerciseId
+      bodyPart: $bodyPart
+      gifUrl: $gifUrl
+      equipment: $equipment
+      name: $name
+      target: $target
+  ) {
       email
       savedExercises {
-        exerciseId
-        authors
-        description
-        title
-        image
-        link
+          exerciseId
+          bodyPart
+          gifUrl
+          equipment
+          name
+          target
       }
-    }
   }
+}
 `;
 
 export const REMOVE_EXERCISE = gql`
   mutation removeExercise($exerciseId: ID!) {
     removeExercise(exerciseId: $exerciseId) {
-      _id
-      username
       email
       savedExercise {
+        bodyPart
         exerciseId
-        authors
-        description
-        title
-        image
-        link
+        gifUrl
+        equipment
+        name
+        target
       }
     }
   }
