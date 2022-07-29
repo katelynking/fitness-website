@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -13,20 +13,20 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     setShowAlert(true);
-  //   } else {
-  //     setShowAlert(false);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setUserFormData({ ...userFormData, [name]: value });
-  // };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -40,39 +40,49 @@ const SignupForm = () => {
 
     try {
       // const response = await addUser(userFormData);
-      const response = await addUser({
-        variables: {
-          username: userFormData.username,
-          email: userFormData.email,
-          password: userFormData.password,
-        },
-      })
+      // const response = await addUser({
+      //   variables: {
+      //     username: userFormData.username,
+      //     email: userFormData.email,
+      //     password: userFormData.password,
+      //   },
+      // })
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-
-      const token = response.data.addUser.token;
-      // const { token, user } = await response.json();
-      // console.log(user);
-      Auth.login(token);
+      const { data } = await addUser({
+        variables: { ...userFormData },
+      });
+      console.log(data);
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
-    };
+    }
+    //  console.log(response)
+    //   if (!response.ok) {
+    //     throw new Error('something went wrong!');
+    //   }
 
-    // setUserFormData({
-    //   username: '',
-    //   email: '',
-    //   password: '',
-    // });
+
+    //   const token = response.data.addUser.token;
+    //   console.log(token)
+    //   // const { token, user } = await response.json();
+    //   // console.log(user);
+    //   Auth.login(token);
+    // } catch (err) {
+    //   console.error(err);
+    //   setShowAlert(true);
+    // };
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
-  };
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUserFormData({ ...userFormData, [name]: value });
+  // };
 
 
   return (
