@@ -15,7 +15,7 @@ const AppNavbar = () => {
       <Navbar variant='dark' expand='lg' className='landing-page-body'>
         <Container fluid className='justify-content-center'>
           <Navbar.Brand as={Link} to='/' className='heading'>
-            FITNESS TRACKER
+            TRAKLETE
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>

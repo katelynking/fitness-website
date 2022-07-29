@@ -128,11 +128,12 @@ const SearchExercises = () => {
   };
 
   return (
-    <>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
-          <h1>Search for Exercises!</h1>
-          <DropdownButton id="dropdown-basic-button" title="Pick Body Part">
+    <div className='container-background centered'>
+      <div fluid className="vibrant">
+        <Container >
+          <span className='exercise-search-font'>
+            SEARCH FOR EXERCISES</span>
+          <DropdownButton id="dropdown-basic-button" title="SELECT BODY PART">
             {exerciseList.map((exercise) => {
               return (
                 <Dropdown.Item
@@ -151,14 +152,14 @@ const SearchExercises = () => {
             })}
           </DropdownButton>
         </Container>
-      </Jumbotron>
+      </div>
 
       <Container>
-        <h2>
+        <span className='white-font'>
           {searchedExercise.length
             ? `Viewing ${searchedExercise.length} results:`
             : "Search for an exercise to begin"}
-        </h2>
+        </span>
         <CardColumns>
           {searchedExercise.map((book) => {
             return (
@@ -181,13 +182,13 @@ const SearchExercises = () => {
                       disabled={savedBookIds?.some(
                         (savedBookId) => savedBookId === book.bookId
                       )}
-                      className="btn-block btn-info"
+                      className="btn-block btn-info add-btn"
                       // onClick={() => handleSaveBook(book.bookId)}>
                       // {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
                       // ? 'This exercise has already been saved!'
                       // : 'Save this Exercise!'}
                     >
-                      
+                      ADD EXERCISE
                     </Button>
                   )}
                 </Card.Body>
@@ -196,7 +197,7 @@ const SearchExercises = () => {
           })}
         </CardColumns>
       </Container>
-    </>
+    </div>
   );
 };
 

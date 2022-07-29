@@ -1,32 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;0,900;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 
 
 body {
-  background-image: url('./img/fitness.jpg');
+  background-image: url('./img/fitness-blue.jpg');
   background-size:cover;
   background-attachment: fixed;
   font-family: 'Lato', sans-serif; 
   background-position:bottom;
+  position: relative;
 
 }
+
 
 footer {
   position:fixed;
   bottom:0px;
-  height: 5%;
+  margin:0px;
+  height: 24px;
   width: 100%;
   color: rgb(255, 255, 255);
-  background-color: rgba(4, 32, 88, 0.723);
+  background-color: rgba(103, 20, 151, 0.844);
   opacity: 100%;
   font-variant: all-small-caps;
   font-size: 16px;
   font-weight: 600;
-  padding: 4px;
+  /* padding: 4px; */
   text-align:center;
   letter-spacing: 3px;
   justify-content: center;
-  font-family: 'Lato';
+  font-family: 'Lato', sans-serif;
   
 }
 
@@ -40,6 +43,8 @@ footer {
 .heading {
   font-weight: 900;
   font-size: 5vh;
+  font-style: italic;
+
 }
 
 .links {
@@ -51,9 +56,9 @@ footer {
   display:block;
   border: 4px solid white;
   color: white;
-  font-size: 4vw;
+  font-size: 3.5vw;
   text-align: center;
-  width: 55%;
+  width: 60%;
   margin-top: 15%;
   background-color:rgba(255, 255, 255, 0.244);
 
@@ -65,8 +70,59 @@ footer {
 .loading {
   color: white;
   font-style: italic;
-  font-weight: 700;
+  font-weight: 400;
 }
+
+.container-background {
+  background-color: rgb(17, 17, 24);
+  /* position:absolute; */
+  padding: 2%;
+  margin: 4%;
+}
+
+.exercise-search-font {
+  font-family:'Lato', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size:4vh;
+  color:rgb(252, 252, 252);
+
+}
+
+.white-font {
+  color:rgba(255, 255, 255, 0.767);
+  font-size: 3vh;
+  margin-bottom: 10px;
+}
+
+#dropdown-basic-button {
+  background-color: rgb(14, 169, 226);
+  border:none;
+  border-radius: 0px;
+  padding: 0.5% 7%;
+  letter-spacing: 2px;
+  margin-bottom: 3%;
+  
+}
+
+#dropdown-basic-button:active, #dropdown-basic-button::selection
+#dropdown-basic-button:after {
+  border:none;
+  box-shadow: none;
+}
+
+.add-btn {
+  background-color: rgb(58, 160, 56);
+  border: none;
+  border-radius:0px;
+  
+}
+
+.add-btn:hover {
+  background-color: rgba(44, 191, 42, 0.782);
+}
+
+
 
 
 
