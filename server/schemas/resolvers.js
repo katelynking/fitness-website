@@ -6,19 +6,23 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       console.log(context.user);
-      if (context.user) {
-        const userData = await User.findOne({
-          _id: context.user._id,
-        }).select("-__v -password");
-        return userData;
-      }
-      throw new AuthenticationError("not logged in");
+      const userData = await User.find({})
+      return userData
+      //if (context.user) {
+    //    const userData = await User.findOne({
+      //    _id: context.user._id,
+        //}).select("-__v -password");
+        //return userData;
+     // }
+    //  throw new AuthenticationError("not logged in");
     },
   },
   Mutation: {
     addUser: async (parent, args) => {
+      console.log(args)
       const user = await User.create(args);
       const token = signToken(user);
+      console.log(token,user)
       return { user, token };
     },
     login: async (parent, { email, password }) => {
