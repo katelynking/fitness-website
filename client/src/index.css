@@ -114,11 +114,12 @@ footer {
   background-color: rgb(79, 198, 61);
   border: none;
   border-radius:0px;
+  font-weight:700;
   
 }
 
 .add-btn:hover {
-  background-color: rgba(52, 217, 27, 0.677);
+  background-color: rgba(22, 187, 52, 0.707);
 }
 
 
@@ -135,7 +136,24 @@ h6 {
   font-family: 'Lato', sans-serif;
 }
 
+
+.card-body {
+  border-radius:0px;
+  background-color:rgb(255, 255, 255);
+  margin:0px;
+  padding:0px;
+  color: rgb(136, 131, 131);
+}
+
+.card-title {
+  font-variant: all-small-caps;
+  font-weight:700;
+  font-size:3vh;
+  color:rgb(17, 17, 24);
+}
+
 .small {
-  font-weight: 300;
+  font-weight: 400;
   font-style: italic;
+  font-size:15px;
 }
