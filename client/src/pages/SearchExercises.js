@@ -16,7 +16,7 @@ import Auth from "../utils/auth";
 import { saveExerciseIds, getSavedExerciseIds } from "../utils/localStorage";
 import { useMutation } from "@apollo/client";
 import { SAVE_EXERCISE } from "../utils/mutations";
-// import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const SearchExercises = () => {
   const [exerciseList] = useState([
@@ -32,11 +32,11 @@ const SearchExercises = () => {
     "Waist",
   ]);
   // create state for holding returned google api data
-  const [searchedExercise, setSearchedExercise] = useState([]);
+  const [searchedExercises, setSearchedExercises] = useState([]);
   // create state for holding our search field data
   const [exercise, setExercise] = useState("");
 
-  // create state to hold saved bookId values
+  // create state to hold saved exerciseId values
   const [savedExerciseIds, setSavedExerciseIds] = useState(getSavedExerciseIds());
 
   const [saveExercise] = useMutation(SAVE_EXERCISE);
@@ -88,14 +88,14 @@ const SearchExercises = () => {
         // const { items } = await response.json();
 
         // const bookData = items.map((exercise) => ({
-        //   bookId: exercise.id,
+        //   exerciseId: exercise.id,
         //   authors: exercise.volumeInfo.authors || ['No author to display'],
         //   title: exercise.volumeInfo.title,
         //   description: exercise.volumeInfo.description,
         //   image: exercise.volumeInfo.imageLinks?.thumbnail || '',
       }));
       // console.log(bookData);
-      setSearchedExercise(exerciseData);
+      setSearchedExercises(exerciseData);
       setExercise("");
     } catch (err) {
       console.error(err);
@@ -104,7 +104,7 @@ const SearchExercises = () => {
 
   // create function to handle saving a exercise to our database
   const handleExerciseSelection = async (exercise) => {
-    // find the exercise in `searchedExercise` state by the matching id
+    // find the exercise in `searchedExercises` state by the matching id
     console.log(exercise);
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -128,7 +128,8 @@ const SearchExercises = () => {
   };
 
   const handleSaveExercise = async (exerciseId) => {
-    const exerciseToSave = searchedExercise.find((exercise) => exercise.exerciseId === exerciseId);
+    // find the book in `searchedBooks` state by the matching id
+    const exerciseToSave = searchedExercises.find((exercise) => exercise.exerciseId === exerciseId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -138,17 +139,24 @@ const SearchExercises = () => {
     }
 
     try {
-      const response = await saveExercise(exerciseToSave, token);
+      // const response = await saveExercise(exerciseToSave, token);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
+
+      const { data } = await saveExercise({
+        variables: { exerciseData: { ...exerciseToSave } },
+      });
+      console.log(savedExerciseIds);
+
+      // if book successfully saves to user's account, save book id to state
       setSavedExerciseIds([...savedExerciseIds, exerciseToSave.exerciseId]);
     } catch (err) {
       console.error(err);
     }
-  };
-
+  }
+  
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
@@ -177,12 +185,12 @@ const SearchExercises = () => {
 
       <Container>
         <h2>
-          {searchedExercise.length
-            ? `Viewing ${searchedExercise.length} results:`
+          {searchedExercises.length
+            ? `Viewing ${searchedExercises.length} results:`
             : "Search for an exercise to begin"}
         </h2>
         <CardColumns>
-          {searchedExercise.map((exercise) => {
+          {searchedExercises.map((exercise) => {
             return (
               <Card key={exercise.id} border="dark">
                 {exercise.image ? (
@@ -200,14 +208,12 @@ const SearchExercises = () => {
                   <Card.Text>Equipment: {exercise.equipment}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedExerciseIds?.some(
-                        (savedExerciseId) => savedExerciseId === exercise.exerciseId
-                      )}
+                      disabled={savedExerciseIds?.some((savedExerciseId) => savedExerciseId === exercise.exerciseId)}
                       className="btn-block btn-info"
                       onClick={() => handleSaveExercise(exercise.exerciseId)}>
-                      {savedExerciseIds?.some((savedExerciseId) => savedExerciseId === exercise.ExerciseId)
+                      {savedExerciseIds?.some((savedExerciseId) => savedExerciseId === exercise.exerciseId)
                       ? 'This exercise has already been saved!'
-                      : 'Save this Exercise!'}                      
+                       : 'Save this Exercise!'}
                     </Button>
                   )}
                 </Card.Body>
