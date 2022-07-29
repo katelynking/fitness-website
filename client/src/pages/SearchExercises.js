@@ -13,9 +13,9 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 import Auth from "../utils/auth";
 // import { saveBook, searchGoogleBooks } from '../utils/API';
-import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
+import { saveExerciseIds, getSavedExerciseIds } from "../utils/localStorage";
 import { useMutation } from "@apollo/client";
-import { SAVE_BOOK } from "../utils/mutations";
+import { SAVE_EXERCISE } from "../utils/mutations";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const SearchExercises = () => {
@@ -37,13 +37,13 @@ const SearchExercises = () => {
   const [exercise, setExercise] = useState("");
 
   // create state to hold saved bookId values
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  const [savedExerciseIds, setSavedExerciseIds] = useState(getSavedExerciseIds());
 
-  const [saveBook] = useMutation(SAVE_BOOK);
+  const [saveExercise] = useMutation(SAVE_EXERCISE);
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () => saveBookIds(savedBookIds);
+    return () => saveExerciseIds(savedExerciseIds);
   });
 
   // create method to search for books and set state on form submit
@@ -77,22 +77,22 @@ const SearchExercises = () => {
       console.log(res);
       // }
 
-      const exerciseData = res.map((book) => ({
-        id: book.id,
-        name: book.name,
-        bodyPart: book.bodyPart,
-        target: book.target,
-        equipment: book.equipment,
-        image: book.gifUrl,
+      const exerciseData = res.map((exercise) => ({
+        id: exercise.id,
+        name: exercise.name,
+        bodyPart: exercise.bodyPart,
+        target: exercise.target,
+        equipment: exercise.equipment,
+        image: exercise.gifUrl,
 
         // const { items } = await response.json();
 
-        // const bookData = items.map((book) => ({
-        //   bookId: book.id,
-        //   authors: book.volumeInfo.authors || ['No author to display'],
-        //   title: book.volumeInfo.title,
-        //   description: book.volumeInfo.description,
-        //   image: book.volumeInfo.imageLinks?.thumbnail || '',
+        // const bookData = items.map((exercise) => ({
+        //   bookId: exercise.id,
+        //   authors: exercise.volumeInfo.authors || ['No author to display'],
+        //   title: exercise.volumeInfo.title,
+        //   description: exercise.volumeInfo.description,
+        //   image: exercise.volumeInfo.imageLinks?.thumbnail || '',
       }));
       // console.log(bookData);
       setSearchedExercise(exerciseData);
@@ -102,9 +102,9 @@ const SearchExercises = () => {
     }
   };
 
-  // create function to handle saving a book to our database
+  // create function to handle saving a exercise to our database
   const handleExerciseSelection = async (exercise) => {
-    // find the book in `searchedExercise` state by the matching id
+    // find the exercise in `searchedExercise` state by the matching id
     console.log(exercise);
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -120,7 +120,7 @@ const SearchExercises = () => {
       //   throw new Error('something went wrong!');
       // }
 
-      // if book successfully saves to user's account, save book id to state
+      // if exercise successfully saves to user's account, save exercise id to state
       setExercise("chest");
     } catch (err) {
       console.error(err);
@@ -160,30 +160,30 @@ const SearchExercises = () => {
             : "Search for an exercise to begin"}
         </h2>
         <CardColumns>
-          {searchedExercise.map((book) => {
+          {searchedExercise.map((exercise) => {
             return (
-              <Card key={book.id} border="dark">
-                {book.image ? (
+              <Card key={exercise.id} border="dark">
+                {exercise.image ? (
                   <Card.Img
-                    src={book.image}
-                    alt={`The cover for ${book.name}`}
+                    src={exercise.image}
+                    alt={`The cover for ${exercise.name}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.name}</Card.Title>
-                  <p className="small">Exercise: {book.name}</p>
-                  <p className="small">Body Part: {book.bodyPart}</p>
-                  <p className="small">Target: {book.target}</p>
-                  <Card.Text>Equipment: {book.equipment}</Card.Text>
+                  <Card.Title>{exercise.name}</Card.Title>
+                  <p className="small">Exercise: {exercise.name}</p>
+                  <p className="small">Body Part: {exercise.bodyPart}</p>
+                  <p className="small">Target: {exercise.target}</p>
+                  <Card.Text>Equipment: {exercise.equipment}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
+                      disabled={savedExerciseIds?.some(
+                        (savedExerciseId) => savedExerciseId === exercise.exerciseId
                       )}
                       className="btn-block btn-info"
-                      // onClick={() => handleSaveBook(book.bookId)}>
-                      // {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                      // onClick={() => handleSaveBook(exercise.bookId)}>
+                      // {savedBookIds?.some((savedBookId) => savedBookId === exercise.bookId)
                       // ? 'This exercise has already been saved!'
                       // : 'Save this Exercise!'}
                     >

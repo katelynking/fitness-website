@@ -1,30 +1,30 @@
-export const getSavedBookIds = () => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const getSavedExerciseIds = () => {
+  const savedExerciseIds = localStorage.getItem('saved_exercises')
+    ? JSON.parse(localStorage.getItem('saved_exercises'))
     : [];
 
-  return savedBookIds;
+  return savedExerciseIds;
 };
 
-export const saveBookIds = (bookIdArr) => {
-  if (bookIdArr.length) {
-    localStorage.setItem('saved_books', JSON.stringify(bookIdArr));
+export const saveExerciseIds = (exerciseIdArr) => {
+  if (exerciseIdArr.length) {
+    localStorage.setItem('saved_exercises', JSON.stringify(exerciseIdArr));
   } else {
-    localStorage.removeItem('saved_books');
+    localStorage.removeItem('saved_exercises');
   }
 };
 
-export const removeBookId = (bookId) => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const removeExerciseId = (exerciseId) => {
+  const savedExerciseIds = localStorage.getItem('saved_exercises')
+    ? JSON.parse(localStorage.getItem('saved_exercises'))
     : null;
 
-  if (!savedBookIds) {
+  if (!savedExerciseIds) {
     return false;
   }
 
-  const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
-  localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
+  const updatedSavedExerciseIds = savedExerciseIds?.filter((savedExerciseId) => savedExerciseId !== exerciseId);
+  localStorage.setItem('saved_exercises', JSON.stringify(updatedSavedExerciseIds));
 
   return true;
 };
