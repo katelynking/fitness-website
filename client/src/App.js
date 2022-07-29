@@ -9,7 +9,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import SearchExercises from "./pages/SearchExercises";
-import SavedBooks from "./pages/SavedBooks";
+import SavedExercises from "./pages/SavedExercises";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer/Index";
@@ -42,7 +42,7 @@ function App() {
           <Routes>
             <Route path='/' element= {<Home />} />
             <Route path="/search" element={<SearchExercises />} />
-            <Route path="/saved" element={<SavedBooks />} />
+            <Route path="/saved" element={<SavedExercises />} />
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}
