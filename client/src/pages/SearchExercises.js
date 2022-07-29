@@ -160,7 +160,7 @@ const SearchExercises = () => {
   
   return (
     <div className='container-background centered'>
-      <div fluid className="vibrant">
+      <div fluid>
         <Container >
           <span className='exercise-search-font'>
             SEARCH FOR EXERCISES</span>
@@ -194,7 +194,7 @@ const SearchExercises = () => {
         <CardColumns>
           {searchedExercises.map((exercise) => {
             return (
-              <Card key={exercise.id} border="dark">
+              <Card className='card-body' key={exercise.id} border="dark">
                 {exercise.image ? (
                   <Card.Img
                     src={exercise.image}
@@ -202,8 +202,8 @@ const SearchExercises = () => {
                     variant="top"
                   />
                 ) : null}
-                <Card.Body>
-                  <Card.Title>{exercise.name}</Card.Title>
+                <Card.Body >
+                  <Card.Title className='card-title'>{exercise.name}</Card.Title>
                   <p className="small">Exercise: {exercise.name}</p>
                   <p className="small">Body Part: {exercise.bodyPart}</p>
                   <p className="small">Target: {exercise.target}</p>
