@@ -15,6 +15,8 @@ import { GET_ME } from "../utils/queries";
 import { REMOVE_EXERCISE } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { removeExerciseId } from "../utils/localStorage";
+import { useMutation } from '@apollo/client';
+import { SAVE_EXERCISE } from '../utils/mutations'
 
 const SavedExercises = () => {
   console.log('SavedExercises');
