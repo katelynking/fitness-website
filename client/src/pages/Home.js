@@ -3,7 +3,7 @@ import { Navbar, Col, Container, Modal, Tab } from "react-bootstrap";
 
 const Home = () => {
   return (
-    <body className="body-home">
+    <Container className="body-home">
       <Col>
         <span className="row justify-content-center">
           <div className="slogan justify-content-center">
@@ -13,7 +13,7 @@ const Home = () => {
           </div>
         </span>
       </Col>
-    </body>
+    </Container>
   );
 };
 
