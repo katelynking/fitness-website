@@ -29,33 +29,33 @@ export const removeExerciseId = (exerciseId) => {
   return true;
 };
 
-export const getSavedExerciseIds = () => {
-  const savedExerciseIds = localStorage.getItem('saved_exercises')
-    ? JSON.parse(localStorage.getItem('saved_exercises'))
-    : [];
+// export const getSavedExerciseIds = () => {
+//   const savedExerciseIds = localStorage.getItem('saved_exercises')
+//     ? JSON.parse(localStorage.getItem('saved_exercises'))
+//     : [];
 
-  return savedExerciseIds;
-};
+//   return savedExerciseIds;
+// };
 
-export const saveExerciseIds = (exerciseIdArr) => {
-  if (exerciseIdArr.length) {
-    localStorage.setItem('saved_exercises', JSON.stringify(exerciseIdArr));
-  } else {
-    localStorage.removeItem('saved_exercises');
-  }
-};
+// export const saveExerciseIds = (exerciseIdArr) => {
+//   if (exerciseIdArr.length) {
+//     localStorage.setItem('saved_exercises', JSON.stringify(exerciseIdArr));
+//   } else {
+//     localStorage.removeItem('saved_exercises');
+//   }
+// };
 
-export const removeexerciseId = (exerciseId) => {
-  const savedExerciseIds = localStorage.getItem('saved_exercises')
-    ? JSON.parse(localStorage.getItem('saved_exercises'))
-    : null;
+// export const removeExerciseId = (exerciseId) => {
+//   const savedExerciseIds = localStorage.getItem('saved_exercises')
+//     ? JSON.parse(localStorage.getItem('saved_exercises'))
+//     : null;
 
-  if (!savedExerciseIds) {
-    return false;
-  }
+//   if (!savedExerciseIds) {
+//     return false;
+//   }
 
-  const updatedSavedExerciseIds = savedExerciseIds?.filter((savedExerciseId) => savedExerciseId !== exerciseId);
-  localStorage.setItem('saved_exercise', JSON.stringify(updatedSavedExerciseIds));
+//   const updatedSavedExerciseIds = savedExerciseIds?.filter((savedExerciseId) => savedExerciseId !== exerciseId);
+//   localStorage.setItem('saved_exercise', JSON.stringify(updatedSavedExerciseIds));
 
-  return true;
-};
+//   return true;
+// };
