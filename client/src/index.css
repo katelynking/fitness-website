@@ -15,17 +15,16 @@ body {
 
 footer {
   position:fixed;
-  bottom:0px;
+  bottom:0;
   margin:0px;
-  height: 24px;
+  height: 1.5em;
   width: 100%;
   color: rgb(255, 255, 255);
-  background-color: rgba(100, 33, 155, 0.704);
+  background-color: rgba(56, 56, 144, 0.598);
   opacity: 100%;
   font-variant: all-small-caps;
   font-size: 16px;
   font-weight: 600;
-  /* padding: 4px; */
   text-align:center;
   letter-spacing: 3px;
   justify-content: center;
@@ -112,14 +111,14 @@ footer {
 }
 
 .add-btn {
-  background-color: rgb(58, 160, 56);
+  background-color: rgb(79, 198, 61);
   border: none;
   border-radius:0px;
   
 }
 
 .add-btn:hover {
-  background-color: rgba(44, 191, 42, 0.782);
+  background-color: rgba(52, 217, 27, 0.677);
 }
 
 

@@ -188,7 +188,7 @@ const SearchExercises = () => {
                       // {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
                       // ? 'This exercise has already been saved!'
                       // : 'Save this Exercise!'}
-                    >
+                    >ADD EXERCISE
                     </Button>
                   )}
                 </Card.Body>
