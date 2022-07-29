@@ -8,12 +8,16 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+// import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import { getMe, deleteExercise } from "../utils/API";
+
+import { GET_ME } from "../utils/queries";
+import { REMOVE_EXERCISE } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { removeExerciseId } from "../utils/localStorage";
 
 const SavedExercises = () => {
+  console.log('SavedExercises');
   const [caloriesList] = useState(["Running", "Skiing", "Football", "Lifting"]);
 
   const [userData, setUserData] = useState({});
