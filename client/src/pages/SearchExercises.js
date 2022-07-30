@@ -160,8 +160,8 @@ const SearchExercises = () => {
   
   return (
     <div className='container-background centered'>
-      <div fluid>
-        <Container >
+      <div>
+        <Container fluid >
           <span className='exercise-search-font'>
             SEARCH FOR EXERCISES</span>
           <DropdownButton id="dropdown-basic-button" title="SELECT BODY PART">
