@@ -129,10 +129,11 @@ const SearchCalories = () => {
 //   };
 
   return (
-    <>
-      <Jumbotron fluid className='text-light bg-dark'>
-        <Container>
-          <h1>Caloric Expenditure</h1>
+    
+      <div className='container-background centered'>
+        <div>
+        <Container fluid>
+          <span className='exercise-search-font'>CALORIC EXPENDITURE</span>
           <DropdownButton id="dropdown-basic-button" title="SELECT ACTIVITY">
             {exerciseList.map((searchInput) => {
               return (
@@ -152,14 +153,15 @@ const SearchCalories = () => {
             })}
           </DropdownButton>
         </Container>
-      </Jumbotron>
+      </div>
+      
 
-      <Container>
-        <h2>
+      <Container as='container'>
+        <span className='white-font'>
           {searchedCalories.length
             ? `Viewing ${searchedCalories.length} results:`
-            : 'Search for a book to begin'}
-        </h2>
+            : 'Search for an activity to begin'}
+        </span>
         <CardColumns>
           {searchedCalories.map((book) => {
             return (
@@ -185,7 +187,7 @@ const SearchCalories = () => {
           })}
         </CardColumns>
       </Container>
-    </>
+    </div>
   );
 };
 
