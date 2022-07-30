@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardColumns,
+  Navbar
 } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -194,7 +195,7 @@ const SearchExercises = () => {
         <CardColumns>
           {searchedExercises.map((exercise) => {
             return (
-              <Card className='card-body' key={exercise.id} border="dark">
+              <Card className='card-body' key={exercise.id}>
                 {exercise.image ? (
                   <Card.Img
                     src={exercise.image}
