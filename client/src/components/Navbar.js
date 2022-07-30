@@ -12,7 +12,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar variant='dark' expand='lg' className='landing-page-body'>
+      <Navbar variant='dark' expand='lg' >
         <Container fluid className='justify-content-center'>
           <Navbar.Brand as={Link} to='/' className='heading'>
             TRAKLETE
@@ -20,19 +20,19 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto links'>
-              <Nav.Link as={Link} to='/search'>
+              <Nav.Link as={Link} to='/search' className='hover-underline-animation'>
                     Search
                   </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link as={Link} to='/saved' className='hover-underline-animation'>
                     See Your Exercises
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link onClick={Auth.logout} className='hover-underline-animation'>Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setShowModal(true)} className='hover-underline-animation'>Login/Sign Up</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse> 
