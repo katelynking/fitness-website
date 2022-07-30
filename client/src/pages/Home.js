@@ -1,8 +1,11 @@
 import React from "react";
 import { Navbar, Col, Container, Modal, Tab } from "react-bootstrap";
 
+
 const Home = () => {
   return (
+    <>
+    <Navbar />
     <Container>
       <Col>
         <span className="row justify-content-center">
@@ -14,6 +17,7 @@ const Home = () => {
         </span>
       </Col>
     </Container>
+    </>
   );
 };
 
