@@ -3,7 +3,7 @@ import { Navbar, Col, Container, Modal, Tab } from "react-bootstrap";
 
 const Home = () => {
   return (
-    <Container className="body-home">
+    <Container>
       <Col>
         <span className="row justify-content-center">
           <div className="slogan justify-content-center">
