@@ -3,7 +3,7 @@
 
 
 body {
-  background-image: url('./img/fitness-black-green.jpg');
+  background-image: url('./img/fitness-black.jpg');
   background-size:cover;
   background-attachment: fixed;
   font-family: 'Lato', sans-serif; 
@@ -20,7 +20,7 @@ footer {
   height: 1.5em;
   width: 100%;
   color: rgb(255, 255, 255);
-  background-color:rgba(23, 162, 222, 0.761);
+  background-color:rgba(241, 210, 56, 0.761);
   opacity: 100%;
   font-variant: all-small-caps;
   font-size: 16px;
@@ -142,6 +142,7 @@ footer {
 
 .dropdown-menu {
   text-align: center;
+  justify-content: center;
   font-variant: all-small-caps;
   font-size:3vh;
   padding: 0%;
@@ -149,7 +150,8 @@ footer {
 
 
 .dropdown-item {
-  padding: 0vw 8.2vw;
+  text-align: center;
+  padding: 0vw 9.7vw;
   
 }
 
