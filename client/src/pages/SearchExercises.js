@@ -186,7 +186,7 @@ const SearchExercises = () => {
         </Container>
       </div>
 
-      <Container>
+      <Container as='container'>
         <span className='white-font'>
           {searchedExercises.length
             ? `Viewing ${searchedExercises.length} results:`
