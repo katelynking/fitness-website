@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 // import { getMe, deleteExercise } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeExerciseId } from '../utils/localStorage';
+// import { removeExerciseId } from '../utils/localStorage';
 // import { SearchExercises } from './SearchExercises';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -102,6 +102,7 @@ const SavedExercises = () => {
       const { data } = await removeExercise({
         variables: { exerciseId },
       });
+      // console.log(`handleremove`);
       console.log(data);
     } catch (err) {
       console.error(err);

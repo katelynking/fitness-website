@@ -41,8 +41,8 @@ export const saveExercise = (exerciseData, token) => {
 
 
 // remove saved book data for a logged in user
-export const deleteExercise = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
+export const deleteExercise = (exerciseId, token) => {
+  return fetch(`/api/users/books/${exerciseId}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
