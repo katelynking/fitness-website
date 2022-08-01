@@ -15,6 +15,17 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
 });
+const cors = require('cors');
+app.use(cors());
+const http = require("http");
+const {Server} = require("socket.io");
+const serverio = http.createServer(app);
+const io = new Server(serverio, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -39,4 +50,15 @@ const startApolloServer = async (typeDefs, resolvers) => {
   };
   
 // Call the async function to start the server
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`)
+
+  socket.on("send_message", (data)  => {
+    socket.broadcast.emit("receive_message", data)
+  })
+});
+
+serverio.listen(3002, () => {
+  console.log("SERVERIO IS RUNNING ON PORT 3002")
+});
 startApolloServer(typeDefs, resolvers);
