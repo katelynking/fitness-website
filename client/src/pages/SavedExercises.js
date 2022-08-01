@@ -120,21 +120,22 @@ const SavedExercises = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
-        <Container>
-          <h1>Viewing saved exercisess!</h1>
-        </Container>
-      </Jumbotron>
-      <Container>
-        <h2>
+      <div className='container-background centered'>
+        <Container fluid>
+          <span className='exercise-search-font'>YOUR SAVED EXERCISES</span>
+          </Container>
+
+          <Container as='container'>
+        
+        <span className='white-font'>
           {profile.savedExercises.length
             ? `Viewing ${profile.savedExercises.length} saved ${profile.savedExercises.length === 1 ? 'exercise' : 'exercises'}:`
             : 'You have no saved exercises!'}
-        </h2>
+        </span><br/><br/>
         <CardColumns>
           {profile.savedExercises.map((exercise) => {
             return (
-              <Card key={exercise.exerciseId} border='dark'>
+              <Card key={exercise.exerciseId} className='saved-card'>
 
                 <Card.Body>
                   <Card.Title>{exercise.name}</Card.Title>
@@ -146,8 +147,8 @@ const SavedExercises = () => {
                     alt={`The cover for ${exercise.name}`}
                     variant="top"
                   />
-                  <Button className='btn-block btn-danger' onClick={() => handleRemoveExercise(exercise.exerciseId)}>
-                    Delete this Exercise!
+                  <Button className='btn-block btn-danger remove-btn' onClick={() => handleRemoveExercise(exercise.exerciseId)}>
+                    REMOVE
                   </Button>
                 </Card.Body>
               </Card>
@@ -155,6 +156,7 @@ const SavedExercises = () => {
           })}
         </CardColumns>
       </Container>
+      </div>
     </>
   );
 };

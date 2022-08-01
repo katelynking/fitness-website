@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-import logo from '../img/triangle-white.png';
+import logo from '../img/tri-logo-gold.png';
 
 import Auth from '../utils/auth';
 
@@ -13,7 +13,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar variant='dark' expand='lg' >
+      <Navbar className='centered' variant='dark' expand='lg' >
         <Container fluid className='justify-content-center'>
           <Navbar.Brand as={Link} to='/' className='heading'>
             TRAKLETE
@@ -48,7 +48,7 @@ const AppNavbar = () => {
       </Navbar>
       {/* set modal data up */}
       <Modal
-        size='lg'
+        size='md'
         show={showModal}
         onHide={() => setShowModal(false)}
         aria-labelledby='signup-modal'
