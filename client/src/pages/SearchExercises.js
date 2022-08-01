@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  Jumbotron,
+  // Jumbotron,
   Container,
-  Col,
-  Form,
+  // Col,
+  // Form,
   Button,
   Card,
   CardColumns,
-  Navbar
+  // Navbar
 } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -17,7 +17,7 @@ import Auth from "../utils/auth";
 import { saveExerciseIds, getSavedExerciseIds } from "../utils/localStorage";
 import { useMutation } from "@apollo/client";
 import { SAVE_EXERCISE } from "../utils/mutations";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+// import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const SearchExercises = () => {
   const [exerciseList] = useState([
