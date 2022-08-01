@@ -54,8 +54,8 @@ export const REMOVE_EXERCISE = gql`
   }
 `;
 
-export const SAVE_CALORTIES = gql`
-mutation saveCalories(ScalorieData: CaloriesInput!) {
+export const SAVE_CALORIES = gql`
+mutation saveCalories($calorieData: CaloriesInput!) {
   saveCalories(calorieData: $calorieData) {
     _id
     username

@@ -57,7 +57,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     saveExercise(exerciseData: ExerciseInput!): User
     removeExercise(exerciseId: String!): User
-    saveCalories(calorieData: CalorieInput!): User
+    saveCalories(calorieData: CaloriesInput!): User
     removeCalories(calorieId: String!): User
   }
 `;
