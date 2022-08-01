@@ -140,7 +140,11 @@ const SavedExercises = () => {
                   <p className='small'>Body Part: {exercise.bodyPart}</p>
                   <Card.Text>{exercise.target}</Card.Text>
                   <p>Equipment: {exercise.equipment}</p>
-                  <p>{exercise.gifUrl}</p>
+                  <Card.Img
+                    src={exercise.gifUrl}
+                    alt={`The cover for ${exercise.name}`}
+                    variant="top"
+                  />
                   <Button className='btn-block btn-danger' onClick={() => handleRemoveExercise(exercise.exerciseId)}>
                     Delete this Exercise!
                   </Button>
