@@ -73,11 +73,7 @@ export const REMOVE_CALORIES = gql`
     removeCalories(calorieId: $calorieId) {
       email
       savedCalories {
-        calories
         calorieId
-        totalCal
-        name
-        duration
       }
     }
   }
