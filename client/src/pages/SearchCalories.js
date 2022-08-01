@@ -165,7 +165,7 @@ const SearchCalories = () => {
         <CardColumns>
           {searchedCalories.map((book) => {
             return (
-              <Card className='card-body' key={book.id} border='dark'>
+              <Card className='card-body' key={book.id}>
                 <Card.Body>
                 <Card.Title>{book.name}</Card.Title>
                   <p className='small'>Cals per hour: {book.bodyPart}</p>
