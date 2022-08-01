@@ -44,14 +44,11 @@ export const SAVE_EXERCISE = gql`
 export const REMOVE_EXERCISE = gql`
   mutation removeExercise($exerciseId: ID!) {
     removeExercise(exerciseId: $exerciseId) {
+      _id
+      username
       email
       savedExercise {
-        bodyPart
         exerciseId
-        gifUrl
-        equipment
-        name
-        target
       }
     }
   }
