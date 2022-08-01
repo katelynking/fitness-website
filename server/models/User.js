@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const exerciseSchema = require('./Exercises');
+const calorieSchema = require('./Calories');
 
 const userSchema = new Schema(
   {
@@ -21,6 +22,7 @@ const userSchema = new Schema(
       required: true,
     },
     savedExercises: [exerciseSchema],
+    savedCalories: [calorieSchema],
   },
   // set this to use virtual below
   {
@@ -48,6 +50,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 userSchema.virtual('exerciseCount').get(function () {
   return this.savedExercises.length;
+});
+
+userSchema.virtual('calorieCount').get(function () {
+  return this.savedCalories.length;
 });
 
 const User = model('User', userSchema);

@@ -5,7 +5,7 @@ const calorieSchema = new Schema({
     type: String,
     required: true,
   },
-  exerciseId: {
+  calorieId: {
     type: String,
     required: true,
   },

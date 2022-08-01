@@ -62,7 +62,7 @@ const SearchCalories = () => {
       
 
       const bookData = res.map((book) => ({
-        exerciseId: Math.floor(Math.random() * 1000000000),
+        calorieId: Math.floor(Math.random() * 1000000000),
         name: book.name,
         calories: book.calories_per_hour,
         duration: book.duration_minutes,
