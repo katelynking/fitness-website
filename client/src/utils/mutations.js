@@ -35,8 +35,8 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_EXERCISE = gql`
-mutation SaveExercise($exerciseData: ExerciseInput!) {
-  saveExercise(exerciseData: $exerciseData) {
+mutation saveExercises($exerciseData: ExerciseInput!) {
+  saveExercises(exerciseData: $exerciseData) {
     _id
     username
     email
@@ -54,7 +54,7 @@ export const REMOVE_EXERCISE = gql`
       _id
       username
       email
-      savedExercise {
+      savedExercises {
         exerciseId
       }
     }

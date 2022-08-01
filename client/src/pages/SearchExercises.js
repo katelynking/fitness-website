@@ -35,7 +35,7 @@ const SearchExercises = () => {
   // create state for holding returned google api data
   const [searchedExercises, setSearchedExercises] = useState([]);
   // create state for holding our search field data
-  const [exercise, setExercise] = useState("");
+  // const [exercise, setExercise] = useState("");
 
   // create state to hold saved exerciseId values
   const [savedExerciseIds, setSavedExerciseIds] = useState(getSavedExerciseIds());
@@ -97,7 +97,7 @@ const SearchExercises = () => {
       }));
       // console.log(bookData);
       setSearchedExercises(exerciseData);
-      setExercise("");
+      // setExercise("");
     } catch (err) {
       console.error(err);
     }
@@ -114,18 +114,18 @@ const SearchExercises = () => {
       return false;
     }
 
-    try {
-      // const response = await saveBook(bookToSave, token);
+    // try {
+    //   // const response = await saveBook(bookToSave, token);
 
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
+    //   // if (!response.ok) {
+    //   //   throw new Error('something went wrong!');
+    //   // }
 
-      // if exercise successfully saves to user's account, save exercise id to state
-      setExercise("chest");
-    } catch (err) {
-      console.error(err);
-    }
+    //   // if exercise successfully saves to user's account, save exercise id to state
+    //   // setExercise("chest");
+    // } catch (err) {
+    //   console.error(err);
+    // }
   
   };
 
@@ -149,9 +149,9 @@ const SearchExercises = () => {
       // }
 
       const { data } = await saveExercise({
-        variables: { exerciseData: { ...exerciseToSave } },
+        variables: { exerciseData: { ...exerciseToSave } }
       });
-      console.log(savedExerciseIds);
+      console.log(data.saveExercises.savedExercises);
 
       // if book successfully saves to user's account, save book id to state
       setSavedExerciseIds([...savedExerciseIds, exerciseToSave.exerciseId]);
