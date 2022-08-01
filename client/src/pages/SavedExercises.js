@@ -9,25 +9,24 @@ import { GET_ME } from '../utils/queries';
 import { REMOVE_EXERCISE } from '../utils/mutations';
 
 const SavedExercises = () => {
-  // const [userData, setUserData] = useState({});
-
-  // use this to determine if `useEffect()` hook needs to run again
-  // const userDataLength = Object.keys(userData).length;
 
   const { loading, data } = useQuery(GET_ME);
 
-  const [removeExercise, { error }] = useMutation(REMOVE_EXERCISE, {
-    update(cache, { data: { removeExercise } }) {
-      try {
-        cache.writeQuery({
-          query: GET_ME,
-          data: { me: removeExercise },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  });
+  const [removeExercise, { error }] = useMutation(REMOVE_EXERCISE);
+    
+  //   {
+  //   update(cache, { data:  { removeExercise } }) {
+  //     try {
+  //       cache.writeQuery({
+  //         query: GET_ME,
+  //         data: { me: removeExercise },
+  //       });
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   },
+  // }
+  
 
   const profile = data?.me || data?.profile || {};
 
@@ -44,66 +43,13 @@ const SavedExercises = () => {
     );
   }
 
-
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await getMe(token);
-
-  //       if (!response.ok) {
-  //         throw new Error('something went wrong!');
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userDataLength]);
-
-
-  // const handleDeleteExercise = async (exerciseId) => {
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const response = await REMOVE_EXERCISE(exerciseId, token);
-
-  //     if (!response.ok) {
-  //       throw new Error('something went wrong!');
-  //     }
-
-  //     const updatedUser = await response.json();
-  //     setUserData(updatedUser);
-
-  //     removeExerciseId(exerciseId);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-
-
   const handleRemoveExercise = async (exerciseId) => {
+    console.log(exerciseId);
     try {
-      const { data } = await removeExercise({
-        variables: { exerciseId },
+      const { info } = await removeExercise({
+        variables: { exerciseId: exerciseId },
       });
-      // console.log(`handleremove`);
-      console.log(data);
+      console.log(info);
     } catch (err) {
       console.error(err);
     }
@@ -112,7 +58,7 @@ const SavedExercises = () => {
   if (!profile.savedExercises.length) {
     return <h3>No Exercises Saved Yet</h3>;
   }
-  console.log(profile);
+  // console.log(profile);
   // if data isn't here yet, say so
   // if (!userDataLength) {
   //   return <h2>LOADING...</h2>;
@@ -125,8 +71,6 @@ const SavedExercises = () => {
           <span className='exercise-search-font'>YOUR SAVED EXERCISES</span>
           </Container>
 
-          <Container as='container'>
-        
         <span className='white-font'>
           {profile.savedExercises.length
             ? `Viewing ${profile.savedExercises.length} saved ${profile.savedExercises.length === 1 ? 'exercise' : 'exercises'}:`
@@ -155,7 +99,6 @@ const SavedExercises = () => {
             );
           })}
         </CardColumns>
-      </Container>
       </div>
     </>
   );
