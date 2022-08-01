@@ -13,7 +13,7 @@ body {
 }
 
 .logo {
-  width: 50px;
+  width: 5vh;
   /* margin-left: 33%; */
 }
 
@@ -168,6 +168,22 @@ footer {
   opacity: 70%;
 }
 
+.saved-card {
+  border-radius:0px;
+}
+
+.remove-btn {
+  background-color: rgb(240, 130, 33);
+  border-radius:0px;
+  border:none;
+  font-weight: 700;
+  
+}
+
+.remove-btn:hover {
+  background-color: rgb(240, 130, 33);
+  opacity:70%;
+}
 
 
 .slogan {
@@ -284,7 +300,7 @@ h6 {
 
 
 .card-body {
-  border:none;
+  /* border:none; */
   border-radius:0px;
   background-color:rgb(255, 255, 255);
   margin:0px;
