@@ -79,12 +79,12 @@ const SearchExercises = () => {
       // }
 
       const exerciseData = res.map((exercise) => ({
-        id: exercise.id,
+        exerciseId: exercise.id,
         name: exercise.name,
         bodyPart: exercise.bodyPart,
         target: exercise.target,
         equipment: exercise.equipment,
-        image: exercise.gifUrl,
+        gifUrl: exercise.gifUrl,
 
         // const { items } = await response.json();
 
@@ -132,6 +132,7 @@ const SearchExercises = () => {
   const handleSaveExercise = async (exerciseId) => {
     // find the book in `searchedBooks` state by the matching id
     const exerciseToSave = searchedExercises.find((exercise) => exercise.exerciseId === exerciseId);
+    console.log(exerciseToSave);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -186,7 +187,7 @@ const SearchExercises = () => {
         </Container>
       </div>
 
-      <Container>
+      <Container as='container'>
         <span className='white-font'>
           {searchedExercises.length
             ? `Viewing ${searchedExercises.length} results:`
@@ -195,10 +196,10 @@ const SearchExercises = () => {
         <CardColumns>
           {searchedExercises.map((exercise) => {
             return (
-              <Card className='card-body' key={exercise.id}>
-                {exercise.image ? (
+              <Card className='card-body' key={exercise.exerciseId}>
+                {exercise.gifUrl ? (
                   <Card.Img
-                    src={exercise.image}
+                    src={exercise.gifUrl}
                     alt={`The cover for ${exercise.name}`}
                     variant="top"
                   />

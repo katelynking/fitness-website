@@ -6,23 +6,23 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       console.log(context.user);
-      const userData = await User.find({})
-      return userData
-      //if (context.user) {
-    //    const userData = await User.findOne({
-      //    _id: context.user._id,
-        //}).select("-__v -password");
-        //return userData;
-     // }
-    //  throw new AuthenticationError("not logged in");
+      // const userData = await User.find({})
+      // return userData
+      if (context.user) {
+        const userData = await User.findOne({
+          _id: context.user._id,
+        }).select("-__v -password");
+        return userData;
+      }
+      throw new AuthenticationError("not logged in");
     },
   },
   Mutation: {
     addUser: async (parent, args) => {
-      console.log(args)
+      console.log(args);
       const user = await User.create(args);
       const token = signToken(user);
-      console.log(token,user)
+      console.log(token, user);
       return { user, token };
     },
     login: async (parent, { email, password }) => {
@@ -38,8 +38,11 @@ const resolvers = {
       return { user, token };
     },
     saveExercise: async (parent, { exerciseData }, context) => {
-      console.log('savedExercise', (new AuthenticationError(`${context.user._id}`)).message);
-      const {exerciseId} = exerciseData
+      console.log(
+        "savedExercise",
+        new AuthenticationError(`${context.user._id}`).message
+      );
+      const { exerciseId } = exerciseData;
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -47,8 +50,9 @@ const resolvers = {
           { new: true }
         );
         return updatedUser;
-      }("You need to be logged in!")
-      throw new AuthenticationError;
+      }
+      ("You need to be logged in!");
+      throw new AuthenticationError();
     },
     removeExercise: async (parent, { exerciseId }, context) => {
       if (context.user) {
