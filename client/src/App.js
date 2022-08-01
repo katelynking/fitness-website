@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer/Index";
 import SearchCalories from "./pages/SearchCalories";
+import Chat from "./pages/Chat";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -45,6 +46,7 @@ function App() {
             <Route path="/search" element={<SearchExercises />} />
             <Route path="/calories" element={<SearchCalories />} />
             <Route path="/saved" element={<SavedExercises />} />
+            <Route path="/chat" element={<Chat />} />
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}
