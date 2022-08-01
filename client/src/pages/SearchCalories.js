@@ -62,11 +62,11 @@ const SearchCalories = () => {
       
 
       const bookData = res.map((book) => ({
-        id: Math.floor(Math.random() * 1000000000),
+        exerciseId: Math.floor(Math.random() * 1000000000),
         name: book.name,
-        bodyPart: book.calories_per_hour,
-        target: book.duration_minutes,
-        equipment: book.total_calories,
+        calories: book.calories_per_hour,
+        duration: book.duration_minutes,
+        totalCal: book.total_calories,
 
       }));
 
@@ -168,9 +168,9 @@ const SearchCalories = () => {
               <Card className='card-body' key={book.id} border='dark'>
                 <Card.Body>
                 <Card.Title>{book.name}</Card.Title>
-                  <p className='small'>Cals per hour: {book.bodyPart}</p>
-                  <p className='small'>Duration: {book.target}</p>
-                  <Card.Text>Total Cals: {book.equipment}</Card.Text>
+                  <p className='small'>Cals per hour: {book.calories}</p>
+                  <p className='small'>Duration: {book.duration}</p>
+                  <Card.Text>Total Cals: {book.totalCal}</Card.Text>
                   {/* {Auth.loggedIn() && (
                     <Button
                       disabled={savedCalorieIds?.some((savedBookId) => savedBookId === book.bookId)}
