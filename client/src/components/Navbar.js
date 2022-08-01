@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import logo from '../img/tri-logo-gold.png';
 
 import Auth from '../utils/auth';
 
@@ -12,11 +13,15 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar variant='dark' expand='lg' >
+      <Navbar className='centered' variant='dark' expand='lg' >
         <Container fluid className='justify-content-center'>
           <Navbar.Brand as={Link} to='/' className='heading'>
             TRAKLETE
           </Navbar.Brand>
+
+          {/* <img src={logo} className='logo'/> */}
+          
+
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto links'>
@@ -43,22 +48,24 @@ const AppNavbar = () => {
       </Navbar>
       {/* set modal data up */}
       <Modal
-        size='lg'
+        size='md'
         show={showModal}
         onHide={() => setShowModal(false)}
         aria-labelledby='signup-modal'
         >
           
         {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='login'>
+        <Tab.Container 
+        defaultActiveKey='login'>
           <Modal.Header closeButton>
-            <Modal.Title id='signup-modal'>
+            <Modal.Title className='centered' id='signup-modal'
+            >
               <Nav variant='pills'>
                 <Nav.Item>
-                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                  <Nav.Link id='modal-login' eventKey='login'>LOGIN</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                  <Nav.Link id= 'modal-login' eventKey='signup'>SIGN UP</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Modal.Title>

@@ -13,39 +13,32 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser(
-    $username: String!, 
-    $email: String!, 
-    $password: String!) 
-    {
-    addUser(
-      username: $username, 
-      email: $email, 
-      password: $password) 
-      {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
         username
         email
         exerciseCount
+        calorieCount
       }
     }
   }
 `;
 
 export const SAVE_EXERCISE = gql`
-mutation saveExercises($exerciseData: ExerciseInput!) {
-  saveExercises(exerciseData: $exerciseData) {
-    _id
-    username
-    email
-    savedExercises {
-      exerciseId
-      name
+  mutation saveExercises($exerciseData: ExerciseInput!) {
+    saveExercises(exerciseData: $exerciseData) {
+      _id
+      username
+      email
+      savedExercises {
+        exerciseId
+        name
+      }
     }
   }
-}
 `;
 
 export const REMOVE_EXERCISE = gql`
@@ -56,6 +49,31 @@ export const REMOVE_EXERCISE = gql`
       email
       savedExercises {
         exerciseId
+      }
+    }
+  }
+`;
+
+export const SAVE_CALORIES = gql`
+mutation saveCalories($calorieData: CaloriesInput!) {
+  saveCalories(calorieData: $calorieData) {
+    _id
+    username
+    email
+    savedCalories {
+      calorieId
+      name
+    }
+  }
+}
+`;
+
+export const REMOVE_CALORIES = gql`
+  mutation removeCalories($calorieId: ID!) {
+    removeCalories(calorieId: $calorieId) {
+      email
+      savedCalories {
+        calorieId
       }
     }
   }

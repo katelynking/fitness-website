@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Jumbotron, Container, Button, Card, CardColumns, Dropdown, DropdownButton } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import {
+  // Jumbotron,
+  Container,
+  Button,
+  Card,
+  CardColumns,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
+import mongoose from "mongoose";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { useMutation } from '@apollo/client';
-import { SAVE_BOOK } from '../utils/mutations';
-
+import { saveCalorieIds, getSavedCalorieIds } from "../utils/localStorage";
+import { useMutation } from "@apollo/client";
+import { SAVE_CALORIES } from "../utils/mutations";
 
 const SearchCalories = () => {
   const [exerciseList] = useState([
@@ -16,73 +24,72 @@ const SearchCalories = () => {
     "Jogging",
     "Basketball",
     "Football",
-    "Baseball"
+    "Baseball",
   ]);
 
   // create state for holding returned google api data
   const [searchedCalories, setSearchedCalories] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [calories, setCalories] = useState("");
+
+  const calorieId = new mongoose.Types.ObjectId();
 
   // create state to hold saved bookId values
-//   const [savedCalorieIds, setSavedCalorieIds] = useState(getSavedBookIds());
+  const [savedCalorieIds, setSavedCalorieIds] = useState(getSavedCalorieIds());
 
-//   const [saveBook] = useMutation(SAVE_BOOK);
-//   // set up useEffect hook to save `savedCalorieIds` list to localStorage on component unmount
-//   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
-//   useEffect(() => {
-//     return () => saveBookIds(savedCalorieIds);
-//   });
+  // const [saveCalories] = useMutation(SAVE_CALORIES);
+  const [saveCalories] = useMutation(SAVE_CALORIES);
+  //   // set up useEffect hook to save `savedCalorieIds` list to localStorage on component unmount
+  //   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  useEffect(() => {
+    return () => saveCalorieIds(savedCalorieIds);
+  });
 
   // create method to search for books and set state on form submit
-  const handleFormSubmit = async (searchInput) => {
+  const handleFormSubmit = async (calories) => {
     // event.preventDefault();
-
-    // if (!searchInput) {
+    console.log(calories);
+    // if (!calories) {
     //   return false;
     // }
 
-      try {
-   
-        const url = `https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=${searchInput.toLowerCase()}`
+    try {
+      const url = `https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=${calories.toLowerCase()}`;
 
-        const options = {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key":
-              "6ac7ece7aamsh9369ca45e027031p1ab0fbjsn1c8c1f20dd0d",
-            "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
-          },
-        };
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "6ac7ece7aamsh9369ca45e027031p1ab0fbjsn1c8c1f20dd0d",
+          "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
+        },
+      };
 
-        
-        const resEx = await fetch(url, options);
-        const res = await resEx.json();
-          console.log(res);
-      
+      const resEx = await fetch(url, options);
+      const res = await resEx.json();
+      console.log(res);
 
-      const bookData = res.map((book) => ({
-        id: Math.floor(Math.random() * 1000000000),
-        name: book.name,
-        bodyPart: book.calories_per_hour,
-        target: book.duration_minutes,
-        equipment: book.total_calories,
-
+      const calorieData = res.map((calories) => ({
+        calorieId: new mongoose.Types.ObjectId(),
+        name: calories.name,
+        calories: calories.calories_per_hour,
+        duration: calories.duration_minutes,
+        totalCal: calories.total_calories,
       }));
 
-      setSearchedCalories(bookData);
-      setSearchInput('');
+      setSearchedCalories(calorieData);
+      setCalories("");
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleExerciseSelection = async (searchInput) => {
+  const handleCalorieSelection = async (calories) => {
     // find the exercise in `searchedExercises` state by the matching id
-    console.log(searchInput);
+    console.log(calories);
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    handleFormSubmit(searchInput);
+    handleFormSubmit(calories);
     if (!token) {
       return false;
     }
@@ -95,92 +102,108 @@ const SearchCalories = () => {
       // }
 
       // if exercise successfully saves to user's account, save exercise id to state
-      setSearchInput("chest");
+      setCalories("lifting");
     } catch (err) {
       console.error(err);
     }
-  
   };
 
-  // create function to handle saving a book to our database
-//   const handleSaveBook = async (bookId) => {
-//     // find the book in `searchedCalories` state by the matching id
-//     const bookToSave = searchedCalories.find((book) => book.bookId === bookId);
+  // create function to handle saving a calories to our database
+  const handleSaveCalories = async (calorieId) => {
+    // find the calories in `searchedCalories` state by the matching id
+    const calorieToSave = searchedCalories.find(
+      (calories) => calories.calorieId === calorieId
+    );
+    console.log(calories);
+    //     // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-//     // get token
-//     const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      return false;
+    }
 
-//     if (!token) {
-//       return false;
-//     }
+    try {
+      //       const response = await saveBook(bookToSave, token);
 
-//     try {
-//       const response = await saveBook(bookToSave, token);
+      //       if (!response.ok) {
+      //         throw new Error('something went wrong!');
+      //       }
+      console.log(calorieToSave);
+      const { error, loading, data } = await saveCalories({
+        variables: { calorieData: { ...calorieToSave } },
+      });
+      console.log(error, loading, data);
+      console.log(savedCalorieIds, data);
 
-//       if (!response.ok) {
-//         throw new Error('something went wrong!');
-//       }
-
-//       // if book successfully saves to user's account, save book id to state
-//       setSavedCalorieIds([...savedCalorieIds, bookToSave.bookId]);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
+      //       // if calories successfully saves to user's account, save calories id to state
+      setSavedCalorieIds([...savedCalorieIds, calorieToSave.calorieId]);
+    } catch (err) {
+      console.error(err, "Save error");
+    }
+  };
 
   return (
-    
-      <div className='container-background centered'>
-        <div>
+    <div className="container-background centered">
+      <div>
         <Container fluid>
-          <span className='exercise-search-font'>CALORIC EXPENDITURE</span>
+          <span className="exercise-search-font">CALORIC EXPENDITURE</span>
           <DropdownButton id="dropdown-basic-button" title="SELECT ACTIVITY">
-            {exerciseList.map((searchInput) => {
+            {exerciseList.map((calories) => {
               return (
                 <Dropdown.Item
-                  key={searchInput}
-                  data-exercise={searchInput}
-                  target={searchInput}
+                  key={calories}
+                  data-exercise={calories}
+                  target={calories}
                   onClick={(e) => {
-                    handleExerciseSelection(
+                    handleCalorieSelection(
                       e.target.getAttribute("data-exercise")
                     );
                   }}
                 >
-                  {searchInput}
+                  {calories}
                 </Dropdown.Item>
               );
             })}
           </DropdownButton>
         </Container>
       </div>
-      
 
-      <Container as='container'>
-        <span className='white-font'>
+      <Container as="container">
+        <span className="white-font">
           {searchedCalories.length
             ? `Viewing ${searchedCalories.length} results:`
-            : 'Search for an activity to begin'}
+            : "Search for an activity to begin"}
         </span>
         <CardColumns>
-          {searchedCalories.map((book) => {
+          {searchedCalories.map((calories) => {
             return (
-              <Card className='card-body' key={book.id} border='dark'>
+              <Card
+                className="card-body"
+                key={calories.calorieId}
+                border="dark"
+              >
                 <Card.Body>
-                <Card.Title>{book.name}</Card.Title>
-                  <p className='small'>Cals per hour: {book.bodyPart}</p>
-                  <p className='small'>Duration: {book.target}</p>
-                  <Card.Text>Total Cals: {book.equipment}</Card.Text>
-                  {/* {Auth.loggedIn() && (
+                  <Card.Title>{calories.name}</Card.Title>
+                  <p className="small">Cals per hour: {calories.calories}</p>
+                  <p className="small">Duration: {calories.duration}</p>
+                  <Card.Text>Total Cals: {calories.totalCal}</Card.Text>
+                  {Auth.loggedIn() && (
                     <Button
-                      disabled={savedCalorieIds?.some((savedBookId) => savedBookId === book.bookId)}
-                      className='btn-block btn-info'
-                      onClick={() => handleSaveBook(book.bookId)}>
-                      {savedCalorieIds?.some((savedBookId) => savedBookId === book.bookId)
-                        ? 'This book has already been saved!'
-                        : 'Save!'}
+                      disabled={savedCalorieIds?.some(
+                        (savedCalorieId) =>
+                          savedCalorieId === calories.calorieId
+                      )}
+                      className="btn-block btn-info"
+                      onClick={() => handleSaveCalories(calories.calorieId)}
+                    >
+                      {savedCalorieIds?.some(
+                        (savedCalorieId) =>
+                          savedCalorieId === calories.calorieId
+                      )
+                        ? "SAVED!"
+                        : "ADD ACTIVITY"}
                     </Button>
-                  )} */}
+                  )}
                 </Card.Body>
               </Card>
             );

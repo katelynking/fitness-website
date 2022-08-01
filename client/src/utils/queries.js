@@ -15,6 +15,13 @@ export const GET_ME = gql`
         equipment
         gifUrl
       }
+      savedCalories {
+        calorieId
+        name
+        calories
+        totalCal
+        duration
+      }
     }
   }
 `;

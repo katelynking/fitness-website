@@ -66,6 +66,23 @@ const resolvers = {
       }
       throw new AuthenticationError("ERROR");
     },
+    saveCalories: async (parent, { calorieData }, context) => {
+      console.log(
+        "savedCalories",calorieData
+      //  new AuthenticationError(`${context.user._id}`).message
+      );
+      const { calorieId } = calorieData;
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedCalories: calorieData } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      console.log("You need to be logged in!");
+      throw new AuthenticationError();
+    }
   },
 };
 

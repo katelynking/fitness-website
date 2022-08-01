@@ -149,8 +149,8 @@ const SavedExercises = () => {
   // };
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
+      <div className='container-background centered'>
+        <Container fluid>
           <h1>Viewing {userData.username}'s exercises!</h1>
           {/* <DropdownButton id="dropdown-basic-button" title="Pick Body Part">
             {caloriesList.map((calories) => {
@@ -171,7 +171,7 @@ const SavedExercises = () => {
             })}
           </DropdownButton> */}
         </Container>
-      </Jumbotron>
+   
       <Container>
         <h2>
           {userData.savedExercises.length
@@ -231,6 +231,7 @@ const SavedExercises = () => {
           })}
         </CardColumns>
       </Container>
+      </div>
     </>
   );
 };

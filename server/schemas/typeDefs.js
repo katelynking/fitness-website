@@ -16,9 +16,21 @@ const typeDefs = gql`
     name: String!
     target: String
   }
-  type Auth {
-    token: ID
-    user: User
+
+  type Calories {
+    calories: String
+    calorieId: String!
+    totalCal: String
+    name: String!
+    duration: String
+  }
+
+  type User {
+    _id: ID!
+    username: String!
+    email: String!
+    exerciseCount: Int
+    savedExercises: [Exercise]
   }
 
 
@@ -32,6 +44,14 @@ const typeDefs = gql`
     target: String
   }
 
+  input CaloriesInput {
+    calories: String
+    calorieId: String!
+    totalCal: String
+    name: String!
+    duration: String
+  }
+
   type Query {
     me: User
   }
@@ -41,6 +61,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     saveExercises(exerciseData: ExerciseInput!): User
     removeExercise(exerciseId: String!): User
+    saveCalories(calorieData: CaloriesInput!): User
+    removeCalories(calorieId: String!): User
   }
 `;
 

@@ -29,33 +29,35 @@ export const removeExerciseId = (exerciseId) => {
   return true;
 };
 
-// export const getSavedExerciseIds = () => {
-//   const savedExerciseIds = localStorage.getItem('saved_exercises')
-//     ? JSON.parse(localStorage.getItem('saved_exercises'))
-//     : [];
+// =========================================================================
 
-//   return savedExerciseIds;
-// };
+export const getSavedCalorieIds = () => {
+  const savedCalorieIds = localStorage.getItem('saved_calories')
+    ? JSON.parse(localStorage.getItem('saved_calories'))
+    : [];
 
-// export const saveExerciseIds = (exerciseIdArr) => {
-//   if (exerciseIdArr.length) {
-//     localStorage.setItem('saved_exercises', JSON.stringify(exerciseIdArr));
-//   } else {
-//     localStorage.removeItem('saved_exercises');
-//   }
-// };
+  return savedCalorieIds;
+};
 
-// export const removeExerciseId = (exerciseId) => {
-//   const savedExerciseIds = localStorage.getItem('saved_exercises')
-//     ? JSON.parse(localStorage.getItem('saved_exercises'))
-//     : null;
+export const saveCalorieIds = (calorieIdArr) => {
+  if (calorieIdArr.length) {
+    localStorage.setItem('saved_calories', JSON.stringify(calorieIdArr));
+  } else {
+    localStorage.removeItem('saved_calories');
+  }
+};
 
-//   if (!savedExerciseIds) {
-//     return false;
-//   }
+export const removeCalorieId = (calorieId) => {
+  const savedCalorieIds = localStorage.getItem('saved_calories')
+    ? JSON.parse(localStorage.getItem('saved_calories'))
+    : null;
 
-//   const updatedSavedExerciseIds = savedExerciseIds?.filter((savedExerciseId) => savedExerciseId !== exerciseId);
-//   localStorage.setItem('saved_exercise', JSON.stringify(updatedSavedExerciseIds));
+  if (!savedCalorieIds) {
+    return false;
+  }
 
-//   return true;
-// };
+  const updatedSavedCalorieIds = savedCalorieIds?.filter((savedCalorieId) => savedCalorieId !== calorieId);
+  localStorage.setItem('saved_calories', JSON.stringify(updatedSavedCalorieIds));
+
+  return true;
+};
