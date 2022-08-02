@@ -180,7 +180,6 @@ const SearchCalories = () => {
               <Card
                 className="card-body"
                 key={calories.calorieId}
-                border="dark"
               >
                 <Card.Body>
                   <Card.Title>{calories.name}</Card.Title>
@@ -193,7 +192,7 @@ const SearchCalories = () => {
                         (savedCalorieId) =>
                           savedCalorieId === calories.calorieId
                       )}
-                      className="btn-block btn-info"
+                      className="btn-block btn-info add-btn"
                       onClick={() => handleSaveCalories(calories.calorieId)}
                     >
                       {savedCalorieIds?.some(
