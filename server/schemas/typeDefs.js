@@ -33,7 +33,10 @@ const typeDefs = gql`
     savedExercises: [Exercise]
   }
 
-
+  type Auth {
+    token: ID
+    user: User
+  }
 
   input ExerciseInput {
     bodyPart: String
