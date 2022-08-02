@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_EXERCISE } from '../utils/mutations';
+import { removeExerciseId } from '../utils/localStorage';
 
 const SavedExercises = () => {
 
@@ -49,6 +50,8 @@ const SavedExercises = () => {
       const { info } = await removeExercise({
         variables: { exerciseId: exerciseId },
       });
+
+      removeExerciseId(exerciseId)
       console.log(info);
     } catch (err) {
       console.error(err);

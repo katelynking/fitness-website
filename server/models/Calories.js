@@ -7,7 +7,7 @@ const calorieSchema = new Schema({
   },
   calorieId: {
     type: String,
-    required: true,
+    // required: true,
   },
   totalCal: {
     type: String,
