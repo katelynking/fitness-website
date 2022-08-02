@@ -38,7 +38,7 @@ const SearchCalories = () => {
   const [savedCalorieIds, setSavedCalorieIds] = useState(getSavedCalorieIds());
 
   // const [saveCalories] = useMutation(SAVE_CALORIES);
-  const [saveCalories] = useMutation(SAVE_CALORIES);
+  const [saveCalories, { error }] = useMutation(SAVE_CALORIES);
   //   // set up useEffect hook to save `savedCalorieIds` list to localStorage on component unmount
   //   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -69,8 +69,10 @@ const SearchCalories = () => {
       const res = await resEx.json();
       console.log(res);
 
+
+
       const calorieData = res.map((calories) => ({
-        calorieId: new mongoose.Types.ObjectId(),
+        // calorieId: "test123",
         name: calories.name,
         calories: calories.calories_per_hour,
         duration: calories.duration_minutes,
@@ -129,10 +131,10 @@ const SearchCalories = () => {
       //         throw new Error('something went wrong!');
       //       }
       console.log(calorieToSave);
-      const { error, loading, data } = await saveCalories({
+      const { data } = await saveCalories({
         variables: { calorieData: { ...calorieToSave } },
       });
-      console.log(error, loading, data);
+      console.log(error, data);
       console.log(savedCalorieIds, data);
 
       //       // if calories successfully saves to user's account, save calories id to state
@@ -187,7 +189,7 @@ const SearchCalories = () => {
                   <p className="small">Cals per hour: {calories.calories}</p>
                   <p className="small">Duration: {calories.duration}</p>
                   <Card.Text>Total Cals: {calories.totalCal}</Card.Text>
-                  {Auth.loggedIn() && (
+                  {/* {Auth.loggedIn() && (
                     <Button
                       disabled={savedCalorieIds?.some(
                         (savedCalorieId) =>
@@ -203,7 +205,7 @@ const SearchCalories = () => {
                         ? "SAVED!"
                         : "ADD ACTIVITY"}
                     </Button>
-                  )}
+                  )} */}
                 </Card.Body>
               </Card>
             );

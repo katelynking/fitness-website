@@ -54,15 +54,34 @@ export const REMOVE_EXERCISE = gql`
   }
 `;
 
+// export const SAVE_CALORIES = gql`
+// mutation saveCalories($calorieData: CaloriesInput!) {
+//   saveCalories(calorieData: $calorieData) {
+//     _id
+//     username
+//     email
+//     savedCalories {
+//       calorieId
+//       name
+//     }
+//   }
+// }
+// `;
+
 export const SAVE_CALORIES = gql`
 mutation saveCalories($calorieData: CaloriesInput!) {
   saveCalories(calorieData: $calorieData) {
     _id
     username
     email
-    savedCalories {
-      calorieId
+    exerciseCount
+    savedExercises {
+      bodyPart
+      exerciseId
+      gifUrl
+      equipment
       name
+      target
     }
   }
 }

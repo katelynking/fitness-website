@@ -68,8 +68,8 @@ const resolvers = {
     },
     saveCalories: async (parent, { calorieData }, context) => {
       console.log(
-        "savedCalories",calorieData
-      //  new AuthenticationError(`${context.user._id}`).message
+        // "savedCalories",calorieData
+       new AuthenticationError(`save the ${calorieData}`).message
       );
       const { calorieId } = calorieData;
       if (context.user) {

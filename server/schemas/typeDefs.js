@@ -8,6 +8,7 @@ const typeDefs = gql`
     exerciseCount: Int
     savedExercises: [Exercise]
   }
+
   type Exercise {
     bodyPart: String
     exerciseId: String!
@@ -19,7 +20,7 @@ const typeDefs = gql`
 
   type Calories {
     calories: String
-    calorieId: String!
+    calorieId: String
     totalCal: String
     name: String!
     duration: String
@@ -29,11 +30,14 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    exerciseCount: Int
+    exerciseCount: Int 
     savedExercises: [Exercise]
   }
 
-
+  type Auth {
+    token: ID
+    user: User
+  }
 
   input ExerciseInput {
     bodyPart: String
@@ -46,7 +50,7 @@ const typeDefs = gql`
 
   input CaloriesInput {
     calories: String
-    calorieId: String!
+    calorieId: String
     totalCal: String
     name: String!
     duration: String
