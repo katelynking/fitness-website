@@ -10,9 +10,10 @@ import {
 import Auth from "../utils/auth";
 // import { removeExerciseId } from '../utils/localStorage';
 // import { SearchExercises } from './SearchExercises';
-import { useQuery, useMutation } from "@apollo/client";
-import { GET_ME } from "../utils/queries";
-import { REMOVE_EXERCISE } from "../utils/mutations";
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+import { REMOVE_EXERCISE } from '../utils/mutations';
+import { removeExerciseId } from '../utils/localStorage';
 
 const SavedExercises = () => {
   const { loading, data } = useQuery(GET_ME);
@@ -59,6 +60,8 @@ const SavedExercises = () => {
       const { info } = await removeExercise({
         variables: { exerciseId: exerciseId },
       });
+
+      removeExerciseId(exerciseId)
       console.log(info);
     } catch (err) {
       console.error(err);
