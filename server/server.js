@@ -4,6 +4,12 @@ const path = require('path');
 const db = require('./config/connection');
 // const routes = require('./routes');
 const { authMiddleware } = require('./utils/auth');
+const serverio = require("http").createServer();
+const io = require("socket.io")(serverio, {
+  cors: {
+    origin: "*"
+  },
+});
 
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -15,17 +21,8 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
 });
-const cors = require('cors');
-app.use(cors());
-const http = require("http");
-const {Server} = require("socket.io");
-const serverio = http.createServer(app);
-const io = new Server(serverio, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,7 +32,31 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// app.use(routes);
+const chatPORT = 3002;
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
+
+io.on("connection", (socket) => {
+  console.log(`Client ${socket.id} connected`);
+
+  // Join a conversation
+  const { roomId } = socket.handshake.query;
+  socket.join(roomId);
+
+  // Listen for new messages
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+  });
+
+  // Leave the room if the user closes the socket
+  socket.on("disconnect", () => {
+    console.log(`Client ${socket.id} diconnected`);
+    socket.leave(roomId);
+  });
+});
+
+serverio.listen(chatPORT, () => {
+  console.log(`Listening on port ${chatPORT}`);
+});
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
@@ -49,16 +70,5 @@ const startApolloServer = async (typeDefs, resolvers) => {
   })
   };
   
-// Call the async function to start the server
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`)
 
-  socket.on("send_message", (data)  => {
-    socket.broadcast.emit("receive_message", data)
-  })
-});
-
-serverio.listen(3002, () => {
-  console.log("SERVERIO IS RUNNING ON PORT 3002")
-});
 startApolloServer(typeDefs, resolvers);

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,14 +7,15 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import SearchExercises from "./pages/SearchExercises";
 import SavedExercises from "./pages/SavedExercises";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer/Index";
 import SearchCalories from "./pages/SearchCalories";
-import Chat from "./pages/Chat";
+import ChatHome from "./ChatHome/Home";
+import ChatRoom from "./ChatRoom/ChatRoom";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -46,7 +47,8 @@ function App() {
             <Route path="/search" element={<SearchExercises />} />
             <Route path="/calories" element={<SearchCalories />} />
             <Route path="/saved" element={<SavedExercises />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat" element={<ChatHome />} />
+            <Route path="/:roomId" element={<ChatRoom />} />
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}
