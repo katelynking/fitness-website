@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import {
+  Jumbotron,
+  Container,
+  CardColumns,
+  Card,
+  Button,
+} from "react-bootstrap";
 // import { getMe, deleteExercise } from '../utils/API';
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 // import { removeExerciseId } from '../utils/localStorage';
 // import { SearchExercises } from './SearchExercises';
 import { useQuery, useMutation } from '@apollo/client';
@@ -10,11 +16,10 @@ import { REMOVE_EXERCISE } from '../utils/mutations';
 import { removeExerciseId } from '../utils/localStorage';
 
 const SavedExercises = () => {
-
   const { loading, data } = useQuery(GET_ME);
 
   const [removeExercise, { error }] = useMutation(REMOVE_EXERCISE);
-    
+
   //   {
   //   update(cache, { data:  { removeExercise } }) {
   //     try {
@@ -27,20 +32,25 @@ const SavedExercises = () => {
   //     }
   //   },
   // }
-  
 
   const profile = data?.me || data?.profile || {};
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <span className="container-background centered">
+        <span className="white-font centered">Loading...</span>
+      </span>
+    );
   }
 
   if (!profile?.username) {
     return (
-      <h4>
-        You need to be logged in to see your profile page. Use the navigation
-        links above to sign up or log in!
-      </h4>
+      <span className="container-background centered">
+        <h4 className="white-font centered">
+          You need to be logged in to see your profile page. Use the navigation
+          links above to sign up or log in!
+        </h4>
+      </span>
     );
   }
 
@@ -69,24 +79,27 @@ const SavedExercises = () => {
 
   return (
     <>
-      <div className='container-background centered'>
+      <div className="container-background centered">
         <Container fluid>
-          <span className='exercise-search-font'>YOUR SAVED EXERCISES</span>
-          </Container>
+          <span className="exercise-search-font">YOUR SAVED EXERCISES</span>
+        </Container>
 
-        <span className='white-font'>
+        <span className="white-font">
           {profile.savedExercises.length
-            ? `Viewing ${profile.savedExercises.length} saved ${profile.savedExercises.length === 1 ? 'exercise' : 'exercises'}:`
-            : 'You have no saved exercises!'}
-        </span><br/><br/>
+            ? `Viewing ${profile.savedExercises.length} saved ${
+                profile.savedExercises.length === 1 ? "exercise" : "exercises"
+              }:`
+            : "You have no saved exercises!"}
+        </span>
+        <br />
+        <br />
         <CardColumns>
           {profile.savedExercises.map((exercise) => {
             return (
-              <Card key={exercise.exerciseId} className='saved-card'>
-
+              <Card key={exercise.exerciseId} className="saved-card">
                 <Card.Body>
                   <Card.Title>{exercise.name}</Card.Title>
-                  <p className='small'>Body Part: {exercise.bodyPart}</p>
+                  <p className="small">Body Part: {exercise.bodyPart}</p>
                   <Card.Text>{exercise.target}</Card.Text>
                   <p>Equipment: {exercise.equipment}</p>
                   <Card.Img
@@ -94,7 +107,10 @@ const SavedExercises = () => {
                     alt={`The cover for ${exercise.name}`}
                     variant="top"
                   />
-                  <Button className='btn-block btn-danger remove-btn' onClick={() => handleRemoveExercise(exercise.exerciseId)}>
+                  <Button
+                    className="btn-block btn-danger remove-btn"
+                    onClick={() => handleRemoveExercise(exercise.exerciseId)}
+                  >
                     REMOVE
                   </Button>
                 </Card.Body>

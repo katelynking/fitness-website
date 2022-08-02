@@ -139,8 +139,8 @@ footer {
 }
 
 .nav-pills .nav-link.active {
-  background-color: rgb(209, 207, 207);
-  border: 5px solid rgb(212, 209, 209);
+  background-color: rgb(132, 129, 129);
+  border: 5px solid rgb(132, 130, 130);
   color: rgb(255, 255, 255);
   /* padding: 0.5vw -5vw; */
 }
