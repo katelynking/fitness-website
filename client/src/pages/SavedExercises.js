@@ -5,6 +5,7 @@ import {
   CardColumns,
   Card,
   Button,
+  Modal,
 } from "react-bootstrap";
 // import { getMe, deleteExercise } from '../utils/API';
 import Auth from "../utils/auth";
@@ -17,6 +18,10 @@ import { removeExerciseId } from "../utils/localStorage";
 
 const SavedExercises = () => {
   const { loading, data } = useQuery(GET_ME);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [removeExercise, { error }] = useMutation(REMOVE_EXERCISE);
 
@@ -81,6 +86,8 @@ const SavedExercises = () => {
   //   return <h2>LOADING...</h2>;
   // }
 
+  
+
   return (
     <>
       <div className="container-background centered">
@@ -113,10 +120,27 @@ const SavedExercises = () => {
                   />
                   <Button
                     className="btn-block btn-danger remove-btn"
-                    onClick={() => handleRemoveExercise(exercise.exerciseId)}
+                    // onClick={() => handleRemoveExercise(exercise.exerciseId)}
+                    onClick={handleShow}
                   >
                     REMOVE
                   </Button>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>You want to quit?!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      Sorry, quiting isn't allowed at TRAKLETE. Put down the remote and keep working out. You got this!
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                      {/* <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                      </Button> */}
+                    </Modal.Footer>
+                  </Modal>
                 </Card.Body>
               </Card>
             );
