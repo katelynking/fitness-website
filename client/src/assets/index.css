@@ -24,8 +24,7 @@ footer {
   height: 1.5em;
   width: 100%;
   color: rgb(255, 255, 255);
-  background-color:rgba(241, 210, 56, 0.761);
-  opacity: 100%;
+  background-color:rgba(222, 203, 29, 0.869);
   font-variant: all-small-caps;
   font-size: 16px;
   font-weight: 600;
@@ -134,7 +133,7 @@ footer {
 
 .nav-pills .nav-link:hover {
   color: gray;
-  border: 5px solid rgba(149, 148, 148, 0.889);
+  border: 5px solid rgba(149, 148, 148);
   /* padding: 0.5vw -5vw; */
 }
 
@@ -147,9 +146,9 @@ footer {
 
 
 
-#modal-login:hover {
+/* #modal-login:hover {
   opacity:70%;
-}
+} */
 
 #submit-btn {
   width:100%;
@@ -158,15 +157,14 @@ footer {
   font-weight: 700;
   border-radius: 0px;
   border:none;
-  background-color: rgb(67, 187, 227);
+  background-color: rgb(7, 172, 243);
   font-size:25px;
   padding:10px;
-  opacity:100%;
 }
 
-#submit-btn:hover {
+/* #submit-btn:hover {
   opacity: 70%;
-}
+} */
 
 .saved-card {
   border-radius:0px;
