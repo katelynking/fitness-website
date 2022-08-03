@@ -3,7 +3,7 @@
 
 
 body {
-  background-image: url('./img/fitness-black.jpg');
+  background-image: url('../img/fitness-black.jpg');
   background-size:cover;
   background-attachment: fixed;
   font-family: 'Lato', sans-serif; 
