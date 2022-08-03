@@ -132,8 +132,8 @@ footer {
 }
 
 .nav-pills .nav-link:hover {
-  color: gray;
-  border: 5px solid rgba(149, 148, 148);
+  color: rgb(154, 151, 151);
+  border: 5px solid rgb(173, 170, 170);
   /* padding: 0.5vw -5vw; */
 }
 
@@ -157,14 +157,14 @@ footer {
   font-weight: 700;
   border-radius: 0px;
   border:none;
-  background-color: rgb(7, 172, 243);
+  background-color: rgb(67, 187, 227);
   font-size:25px;
   padding:10px;
 }
 
-/* #submit-btn:hover {
-  opacity: 70%;
-} */
+#submit-btn:hover {
+  background-color: rgb(106, 202, 234);
+}
 
 .saved-card {
   border-radius:0px;
@@ -179,8 +179,7 @@ footer {
 }
 
 .remove-btn:hover {
-  background-color: rgb(240, 130, 33);
-  opacity:70%;
+  background-color: rgb(242, 152, 74);
 }
 
 
