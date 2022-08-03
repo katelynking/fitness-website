@@ -10,10 +10,10 @@ import {
 import Auth from "../utils/auth";
 // import { removeExerciseId } from '../utils/localStorage';
 // import { SearchExercises } from './SearchExercises';
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
-import { REMOVE_EXERCISE } from '../utils/mutations';
-import { removeExerciseId } from '../utils/localStorage';
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_ME } from "../utils/queries";
+import { REMOVE_EXERCISE } from "../utils/mutations";
+import { removeExerciseId } from "../utils/localStorage";
 
 const SavedExercises = () => {
   const { loading, data } = useQuery(GET_ME);
@@ -61,7 +61,7 @@ const SavedExercises = () => {
         variables: { exerciseId: exerciseId },
       });
 
-      removeExerciseId(exerciseId)
+      removeExerciseId(exerciseId);
       console.log(info);
     } catch (err) {
       console.error(err);
@@ -69,7 +69,11 @@ const SavedExercises = () => {
   };
 
   if (!profile.savedExercises.length) {
-    return <h3>No Exercises Saved Yet</h3>;
+    return (
+      <span className="container-background centered">
+        <h4 className="white-font centered">No Exercises Saved Yet</h4>
+      </span>
+    );
   }
   // console.log(profile);
   // if data isn't here yet, say so
