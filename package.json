@@ -2,6 +2,9 @@
   "name": "fitness-app",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -16,6 +19,8 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.9"
+    "@apollo/client": "^3.7.9",
+    "mongoose": "^6.9.3",
+    "socket.io-client": "^4.6.1"
   }
 }
