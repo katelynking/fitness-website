@@ -15,14 +15,6 @@
   # Usage
   For improving physical fitness and building a fitness community
 
-  [TRAKLETE application](https://traklete.herokuapp.com/)
-
-  ![screenshot of landing page](/client/src/img/landing-page.png)
-  ![screenshot of search exercises](/client/src/img/search-exercises.png)
-  ![screenshot of saved exercises](/client/src/img/saved-exercises.png)
-  ![screenshot of caloric expenditure](/client/src/img/caloric-expenditure.png)
-  ![screenshot of chat](/client/src/img/chat-room.png)
-
   # Questions
   katelynking
   
